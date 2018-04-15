@@ -46,7 +46,11 @@ form input {
   margin-left: 41.25%;
 }
 
-.loginContainer {
+.login {
+  text-align: center;
+}
+
+.register {
   text-align: center;
 }
 
