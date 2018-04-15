@@ -54,6 +54,14 @@ form input {
   text-align: center;
 }
 
+#loginFooter {
+  position: fixed;
+}
+
+#registerFooter {
+  position: fixed;
+}
+
 /*************************************/
 /*Everything below is driving the menu*/
 /*************************************/
