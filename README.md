@@ -6,6 +6,9 @@ We will be using GitHub Issues to track feature development.
 We have both staging and testing branches.
 
 Kat Cosgrove
+
 Patricia Raftery
+
 Austin Matteson
+
 Gene Pieterson
