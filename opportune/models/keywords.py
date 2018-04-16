@@ -20,3 +20,4 @@ class Keyword(Base):
 
 
 Index('entry_index', Keyword.id, unique=True, mysql_length=255)
+ 
