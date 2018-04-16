@@ -50,6 +50,8 @@ button {
 }
 
 form input {
+  font-family: 'Roboto';
+  text-align: center;
   display: block;
   width: 250px;
   height: 40px;
