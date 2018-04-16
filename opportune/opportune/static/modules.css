@@ -13,6 +13,7 @@
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
+
 .fa-gem, .fa-hourglass, .fa-laptop {
   padding-top: 10px;
   color: lightgrey;
@@ -38,12 +39,26 @@ button {
   width: 255px;
 }
 
+.forms {
+  list-style-type: none;
+  margin-left: 20%;
+}
+
+.forms li {
+  display: inline-block;
+  margin: 50px;
+}
+
 form input {
   display: block;
   width: 250px;
   height: 40px;
   margin-top: 5px;
   margin-bottom: 5px;
+  margin-left: 10%;
+}
+
+.updateProfile input {
   margin-left: 41.25%;
 }
 

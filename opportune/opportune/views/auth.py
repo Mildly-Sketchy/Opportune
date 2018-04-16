@@ -7,33 +7,11 @@ from ..models import Account
 from . import DB_ERR_MSG
 
 
-@view_config(route_name='login', renderer='../templates/login.jinja2', permission=NO_PERMISSION_REQUIRED)
-def login_view(request):
-    """Return login page."""
-    if request.authenticated_userid:
-        return HTTPFound(location=request.route_url('profile'))
-
-    if request.method == 'GET':
-        try:
-            username = request.GET['username']
-            password = request.GET['password']
-
-        except KeyError:
-            return {}
-
-        is_authenticated = Account.check_credentials(request, username, password)
-        if is_authenticated[0]:
-            headers = remember(request, userid=username)
-            return HTTPFound(location=request.route_url('profile'), headers=headers)
-        else:
-            return HTTPUnauthorized()
-
-    return HTTPFound(location=request.route_url('home'))
-
-
-@view_config(route_name='register', renderer='../templates/register.jinja2', permission=NO_PERMISSION_REQUIRED)
-def register_view(request):
-    """Return registration page."""
+@view_config(
+    route_name='auth',
+    renderer='../templates/auth.jinja2',
+    permission=NO_PERMISSION_REQUIRED)
+def auth_view(request):
     if request.authenticated_userid:
         return HTTPFound(location=request.route_url('profile'))
 
@@ -65,8 +43,23 @@ def register_view(request):
 
         except DBAPIError:
             return Response(DB_ERR_MSG, content_type='text/plain', status=500)
-    else:
-        return {}
+
+    if request.method == 'GET':
+        try:
+            username = request.GET['username']
+            password = request.GET['password']
+
+        except KeyError:
+            return {}
+
+        is_authenticated = Account.check_credentials(request, username, password)
+        if is_authenticated[0]:
+            headers = remember(request, userid=username)
+            return HTTPFound(location=request.route_url('profile'), headers=headers)
+        else:
+            return HTTPUnauthorized()
+
+    return HTTPFound(location=request.route_url('home'))
 
 
 @view_config(route_name='logout')
