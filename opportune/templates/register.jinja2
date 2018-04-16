@@ -1,0 +1,12 @@
+{% extends "base.jinja2" %}
+{% block content %}
+    <div class="register container">
+    <h1>Register for an account.</h1>
+    <form class="registerForm" method="POST" action="{{request.route_url('register')}}">
+          <input class="username" name="username" type="text" placeholder="Username" required>
+          <input class="email" name="email" type="text" placeholder="Email Address" required>
+          <input class="password" name="password" type="password" placeholder="Password" required>
+          <button type="submit">Register</button>
+    </form>
+  </div>
+{% endblock content %}

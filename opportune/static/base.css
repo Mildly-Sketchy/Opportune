@@ -1,0 +1,20 @@
+@import url('https://fonts.googleapis.com/css?family=Pacifico|Grand+Hotel');
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+a {
+  text-decoration: none;
+}
+
+h1 {
+  font-family: 'Pacifico';
+  font-style: italic;
+}
+
+body {
+  background-image: url('whitebg.png')
+}
+
+h2, h3 {
+  font-family: 'Roboto';
+  font-style: italic;
+}
