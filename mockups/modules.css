@@ -6,27 +6,31 @@
 
 .columns li {
   display: inline-block;
-  margin: 3vw;
+  margin: 4vw;
+  padding: 20px;
   width: 300px;
-  height: 500px;
   background-color: white;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-.columns img {
-  margin-top: 10px;
-  width: 175px;
-  height: 175px;
+.fa-gem, .fa-hourglass, .fa-laptop {
+  padding-top: 10px;
+  color: lightgrey;
+}
+
+.fa-gem:hover, .fa-hourglass:hover, .fa-laptop:hover {
+  padding-top: 10px;
+  color: rgb(0, 206, 252);
 }
 
 .columns h3, h2, h1 {
   font-family: 'Pacifico';
 }
 
-.banner img {
-  /* width: 100%; */
+/* .banner img {
+  width: 100%;
   height: 30%;
-}
+} */
 
 button {
   color: black;
