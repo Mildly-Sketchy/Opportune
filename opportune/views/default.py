@@ -14,12 +14,6 @@ def profile_view(request):
     return {}
 
 
-@view_config(route_name='analytics', renderer='../templates/admin.jinja2')
-def analytics_view(request):
-    """Return employer analytics."""
-    return {}
-
-
 @view_config(route_name='about', renderer='../templates/about.jinja2', permission=NO_PERMISSION_REQUIRED)
 def about_view(request):
     """Return about page."""
