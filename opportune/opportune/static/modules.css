@@ -16,11 +16,13 @@
 .fa-gem, .fa-hourglass, .fa-laptop {
   padding-top: 10px;
   color: lightgrey;
+  transition: all 0.4s ease-in-out;
 }
 
 .fa-gem:hover, .fa-hourglass:hover, .fa-laptop:hover {
   padding-top: 10px;
   color: rgb(0, 206, 252);
+  transition: all 0.4s ease-in-out;
 }
 
 .columns h3, h2, h1 {
