@@ -13,6 +13,7 @@
   <li><div class="register container">
     <h1>Register for an account.</h1>
     <form class="registerForm" method="POST" action="{{request.route_url('auth')}}">
+          <input type="hidden" name="csrf_token" value="{{request.session.get_csrf_token()}}">
           <input class="username" name="username" type="text" placeholder="Username" required>
           <input class="email" name="email" type="text" placeholder="Email Address" required>
           <input class="password" name="password" type="password" placeholder="Password" required>
