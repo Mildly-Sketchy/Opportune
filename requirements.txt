@@ -10,7 +10,6 @@ Jinja2==2.10
 Mako==1.0.7
 MarkupSafe==1.0
 more-itertools==4.1.0
--e git+https://github.com/Mildly-Sketchy/Mildly-Sketchy.git@58fc7fcf302e845035cbb71db640750637215083#egg=opportune&subdirectory=opportune
 PasteDeploy==1.5.2
 pbkdf2==1.3
 plaster==1.0
