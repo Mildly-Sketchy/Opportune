@@ -11,7 +11,7 @@ h1 {
 }
 
 body {
-  background-image: url('{{request.static_url('opportune:whitebg.png')}}')
+  background-image: url('whitebg.png')
 }
 
 h2, h3 {
