@@ -27,11 +27,6 @@
   font-family: 'Pacifico';
 }
 
-/* .banner img {
-  width: 100%;
-  height: 30%;
-} */
-
 button {
   color: black;
   font-family: 'Roboto';
@@ -50,11 +45,7 @@ form input {
   margin-left: 41.25%;
 }
 
-.login {
-  text-align: center;
-}
-
-.register {
+.login, .register, .profile {
   text-align: center;
 }
 

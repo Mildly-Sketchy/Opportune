@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8 ">
+  <title>Opportune | Get Hired</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="{{request.static_url('opportune:static/base.css')}}">
+  <link rel="stylesheet" href="{{request.static_url('opportune:static/layout.css')}}">
+  <link rel="stylesheet" href="{{request.static_url('opportune:static/modules.css')}}">
+  <link rel="stylesheet" href="{{request.static_url('opportune:static/normalize.css')}}">
+</head>
+<body>
+  <header>
+    <nav role="navigation">
+      <div id="menuToggle">
+        <input type="checkbox" />
+        <span></span>
+        <span></span>
+        <span></span>
+        <ul id="menu">
+          <li><a href="{{request.route_url('home')}}">Home</a></li>
+          <li><a href="{{request.route_url('login')}}">Log in</a></li>
+          <li><a href="{{request.route_url('register')}}">Register</a></li>
+          <li><a href="{{request.route_url('profile')}}">Profile</a></li>
+          <li><a href="{{request.route_url('analytics')}}">Analytics</a></li>
+          <li><a href="{{request.route_url('about')}}">About</a></li>
+        </ul>
+      </div>
+      <h1>Opportune</h1>
+    </nav>
+  </header>
+  <body>
+  <main>
+  {% block content %}
+
+  {% endblock content %}
+  </main>
+</body>
+<footer>
+  <ul id="footerMenu">
+    <li><a href="{{request.route_url('home')}}">Home</a></li>
+    <li><p> | </p></li>
+    <li><a href="{{request.route_url('login')}}">Log In</a></li>
+    <li><p> | </p></li>
+    <li><a href="{{request.route_url('register')}}">Register</a></li>
+    <li><p> | </p></li>
+    <li><a href="{{request.route_url('profile')}}">Profile</a></li>
+    <li><p> | </p></li>
+    <li><a href="{{request.route_url('analytics')}}">Analytics</a></li>
+    <li><p> | </p></li>
+    <li><a href="{{request.route_url('about')}}">About</a></li>
+  </ul>
+</footer>
+<script defer src="https://use.fontawesome.com/releases/v5.0.10/js/all.js" integrity="sha384-slN8GvtUJGnv6ca26v8EzVaR9DC58QEwsIk9q1QXdCU8Yu8ck/tL/5szYlBbqmS+" crossorigin="anonymous"></script>
+</html>

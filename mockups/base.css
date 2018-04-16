@@ -11,15 +11,10 @@ h1 {
 }
 
 body {
-  background-image: url('minimalbg.jpg')
+  background-image: url('whitebg.png')
 }
 
-/* h2 {
-  font-family: 'Pacifico';
+h2, h3 {
+  font-family: 'Roboto';
   font-style: italic;
 }
-
-h3 {
-  font-family: 'Pacifico';
-  font-style: italic;
-} */
