@@ -1,5 +1,14 @@
 {% extends "base.jinja2" %}
 {% block content %}
+{% if message %}
+<p>{{message}}</p>
+{% endif %}
+{% if keywords %}
+<p>Your current keywords:</p>
+{% for keyword in keywords %}
+<p>{{keyword.keyword}}</p>
+{% endfor %}
+{% endif %}
 <form action="{{request.route_url('keywords')}}" method="POST">
   <input type="hidden" name="csrf_token" value="{{request.session.get_csrf_token()}}">
   <input class="keyword" name="keyword" type="text" placeholder="keyword" required>

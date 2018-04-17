@@ -39,15 +39,6 @@ def about_view(request):
 @view_config(route_name='keywords', renderer='../templates/email.jinja2')
 def handle_keywords(request):
     """Add and delete keywords in database."""
-    if request.method == 'GET':
-        try:
-            query = request.dbsession.query(Keyword)
-            user_keywords = query.filter(Keyword.user_id == request.authenticated_userid, Association.keyword_id == Keyword.keyword)
-
-        except DBAPIError:
-            raise DBAPIError(DB_ERR_MSG, content_type='text/plain', status=500)
-
-        return{'keywords': user_keywords}
 
     if request.method == 'POST':
 
@@ -56,7 +47,6 @@ def handle_keywords(request):
         if len(keyword.split()) > 1:
             keyword = keyword.split()
             keyword = '+'.join(keyword)
-            print(keyword, "**************")
 
         instance = Keyword(
             keyword=keyword,
@@ -85,7 +75,17 @@ def handle_keywords(request):
 
 @view_config(route_name='email', renderer='../templates/email.jinja2')
 def email_view(request):
-    """Email testing."""
+    """Send email after scraper has run at user request."""
+    if request.method == 'GET':
+        try:
+            query = request.dbsession.query(Keyword)
+            user_keywords = query.filter(Association.user_id == request.authenticated_userid, Association.keyword_id == Keyword.keyword)
+
+        except DBAPIError:
+            raise DBAPIError(DB_ERR_MSG, content_type='text/plain', status=500)
+
+        return{'keywords': user_keywords}
+
     if request.method == 'POST':
         with open('./results.csv') as input_file:
             reader = csv.reader(input_file)
