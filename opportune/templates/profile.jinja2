@@ -9,5 +9,20 @@
           <button type="submit">Update Profile</button>
     </form>
     <h3>Edit your keywords</h3>
+    {% if message %}
+    <p>{{message}}</p>
+    <a href="{{request.route_url('search')}}">Click here</a> to add keywords and search.
+    {% endif %}
+    {% if keywords %}
+    <p>Your current keywords:</p>
+    {% for keyword in keywords %}
+    <form action="{{request.route_url('keywords/delete')}}" method="POST">
+      <input type="hidden" name="csrf_token" value="{{request.session.get_csrf_token()}}">
+      <input type="hidden" name="keyword" value="{{keyword.keyword}}">
+      <button>{{keyword.keyword}}</button>
+    </form>
+    {% endfor %}
+    {% endif %}
+
   </div>
 {% endblock content %}
