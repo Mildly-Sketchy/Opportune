@@ -8,6 +8,8 @@
   <link rel="stylesheet" href="{{request.static_url('opportune:static/layout.css')}}">
   <link rel="stylesheet" href="{{request.static_url('opportune:static/modules.css')}}">
   <link rel="stylesheet" href="{{request.static_url('opportune:static/normalize.css')}}">
+  <link href="http://cdn.pydata.org/bokeh/release/bokeh-0.12.15.min.css" rel="stylesheet" type="text/css">
+  <script src="http://cdn.pydata.org/bokeh/release/bokeh-0.12.15.min.js"></script>
 </head>
 <body>
   <header>
@@ -56,6 +58,8 @@
     <li><a href="{{request.route_url('about')}}">About</a></li>
     <li><p> | </p></li>
     <li><a href="{{request.route_url('email')}}">Email</a></li>
+    <li><p> | </p></li>
+    <li><a href="{{request.route_url('stat')}}">Stat</a></li>
   </ul>
 </footer>
 <script defer src="https://use.fontawesome.com/releases/v5.0.10/js/all.js" integrity="sha384-slN8GvtUJGnv6ca26v8EzVaR9DC58QEwsIk9q1QXdCU8Yu8ck/tL/5szYlBbqmS+" crossorigin="anonymous"></script>
