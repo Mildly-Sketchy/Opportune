@@ -3,27 +3,38 @@ from bs4 import BeautifulSoup
 import urllib3
 import pandas as pd
 from pyramid.view import view_config
+from ..models import Account
+from ..models import Keyword
+from ..models import Association
 
 
-@view_config(route_name='jobs', renderer='../templates/email.jinja2')
+@view_config(route_name='search/results', renderer='../templates/email.jinja2')
 def get_jobs(request):
     if request.method == 'POST':
-        city = request.POST['city']
-        jobs = request.POST['keyword']
+
+        try:
+            query = request.dbsession.query(Keyword)
+            keyword_query = query.filter(Association.user_id == request.authenticated_userid, Association.keyword_id == Keyword.keyword).all()
+            keywords = [keyword.keyword for keyword in keyword_query]
+        except DBAPIError:
+            raise DBAPIError(DB_ERR_MSG, content_type='text/plain', status=500)
+
+        try:
+            city = request.POST['city']
+        except KeyError:
+            return HTTPBadRequest()
 
         url_template = 'https://www.indeed.com/jobs?q={}&l={}'
-        max_results_per_city = 10
+        max_results = 30
 
         df = pd.DataFrame(columns=['location', 'company', 'job_title', 'salary', 'job_link'])
         requests.packages.urllib3.disable_warnings()
-        for job in jobs:
-            for start in range(0, max_results_per_city):
-                url = url_template.format(job, city)
+        for keyword in keywords:
+            for start in range(0, max_results):
+                url = url_template.format(keyword, city)
                 http = urllib3.PoolManager()
                 response = http.request('GET', url)
-                # response = requests.get(url)
                 soups = BeautifulSoup(response.data.decode('utf-8'), 'html.parser')
-                # soups = BeautifulSoup(response.text, 'html.parser')
                 for b in soups.find_all('div', attrs={'class': ' row result'}):
                     location = b.find('span', attrs={'class': 'location'}).text
                     job_title = b.find('a', attrs={'data-tn-element': 'jobTitle'}).text
@@ -34,7 +45,7 @@ def get_jobs(request):
                         company = b.find('span', attrs={'class': 'company'}).text
                     except:
                         # probably attribute error
-                        company = 'NA'
+                         company = 'Not Listed'
                     try:
                         salary = b.find('span', attrs={'class': 'no-wrap'}).text
                     except:
@@ -43,7 +54,6 @@ def get_jobs(request):
 
         df.company.replace(regex=True,inplace=True,to_replace='\n',value='')
         df.salary.replace(regex=True,inplace=True,to_replace='\n',value='')
-        df.salary.replace(regex=True, inplace=True, to_replace='\$', value='')
-        output = df.head(20)
+        output = df.head(30)
         output.to_csv('results.csv', index=False)
         return {}
