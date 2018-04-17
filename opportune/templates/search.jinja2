@@ -6,7 +6,11 @@
 {% if keywords %}
 <p>Your current keywords:</p>
 {% for keyword in keywords %}
-<p>{{keyword.keyword}}</p>
+<form action="{{request.route_url('keywords/delete')}}" method="POST">
+  <input type="hidden" name="csrf_token" value="{{request.session.get_csrf_token()}}">
+  <input type="hidden" name="keyword" value="{{keyword.keyword}}">
+  <button>{{keyword.keyword}}</button>
+</form>
 {% endfor %}
 {% endif %}
 <form action="{{request.route_url('keywords')}}" method="POST">
@@ -14,12 +18,12 @@
   <input class="keyword" name="keyword" type="text" placeholder="keyword" required>
   <button>Add Keyword</button>
 </form> 
-<form action="{{request.route_url('jobs')}}" method="POST">
+<form action="{{request.route_url('search/results')}}" method="POST">
   <input type="hidden" name="csrf_token" value="{{request.session.get_csrf_token()}}">
   <input class="city" name="city" type="text" placeholder="city" required>
   <button>Run Scraper</button>
 </form> 
-<form action="{{request.route_url('email')}}" method="POST">
+<form action="{{request.route_url('search/email')}}" method="POST">
   <input type="hidden" name="csrf_token" value="{{request.session.get_csrf_token()}}">
   <button>Test Email</button>
 </form>

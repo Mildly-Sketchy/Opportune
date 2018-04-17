@@ -9,21 +9,29 @@ from ..models import Keyword
 from ..models import Association
 
 
-@view_config(route_name='jobs', renderer='../templates/email.jinja2')
+@view_config(route_name='search/results', renderer='../templates/email.jinja2')
 def get_jobs(request):
     if request.method == 'POST':
-        query = request.dbsession.query(Keyword)
-        keyword_query = query.filter(Association.user_id == request.authenticated_userid, Association.keyword_id == Keyword.keyword).all()
-        keywords = [keyword.keyword for keyword in keyword_query]
-        city = request.POST['city']
+
+        try:
+            query = request.dbsession.query(Keyword)
+            keyword_query = query.filter(Association.user_id == request.authenticated_userid, Association.keyword_id == Keyword.keyword).all()
+            keywords = [keyword.keyword for keyword in keyword_query]
+        except DBAPIError:
+            raise DBAPIError(DB_ERR_MSG, content_type='text/plain', status=500)
+
+        try:
+            city = request.POST['city']
+        except KeyError:
+            return HTTPBadRequest()
 
         url_template = 'https://www.indeed.com/jobs?q={}&l={}'
-        max_results_per_city = 10
+        max_results = 30
 
         df = pd.DataFrame(columns=['location', 'company', 'job_title', 'salary', 'job_link'])
         requests.packages.urllib3.disable_warnings()
         for keyword in keywords:
-            for start in range(0, max_results_per_city):
+            for start in range(0, max_results):
                 url = url_template.format(keyword, city)
                 http = urllib3.PoolManager()
                 response = http.request('GET', url)
@@ -37,7 +45,7 @@ def get_jobs(request):
                     try:
                         company = b.find('span', attrs={'class': 'company'}).text
                     except:
-                        company = 'NA'
+                        company = 'Not Listed'
                     try:
                         salary = b.find('span', attrs={'class': 'no-wrap'}).text
                     except:
@@ -46,7 +54,6 @@ def get_jobs(request):
 
         df.company.replace(regex=True,inplace=True,to_replace='\n',value='')
         df.salary.replace(regex=True,inplace=True,to_replace='\n',value='')
-        df.salary.replace(regex=True, inplace=True, to_replace='\$', value='')
-        output = df.head(20)
+        output = df.head(30)
         output.to_csv('results.csv', index=False)
         return {}
