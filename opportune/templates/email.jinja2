@@ -17,7 +17,6 @@
 <form action="{{request.route_url('jobs')}}" method="POST">
   <input type="hidden" name="csrf_token" value="{{request.session.get_csrf_token()}}">
   <input class="city" name="city" type="text" placeholder="city" required>
-  <input class="keyword" name="keyword" type="text" placeholder="keyword" required>
   <button>Run Scraper</button>
 </form> 
 <form action="{{request.route_url('email')}}" method="POST">
