@@ -29,6 +29,7 @@ def about_view(request):
 @view_config(route_name='email', renderer='../templates/email.jinja2')
 def email_view(request):
     """Email testing."""
+    # import pdb; pdb.set_trace()
     if request.method == 'POST':
         with open('./results.csv') as input_file:
             reader = csv.reader(input_file)

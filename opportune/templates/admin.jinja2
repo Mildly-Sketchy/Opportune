@@ -4,6 +4,18 @@
     </div>
     <h1>Admin Analytics</h1>
 
-    <div class="table">{{ item }}</div>
+        {% for row in data %}
+    <ul>
+        <li>{{ row.job_title }}<br>
+        {{ row.company }}<br>
+        {{ row.location }}<br>
+        {{ row.salary }}<br>
+        {{ row.job_link }}<br></li>
+    </ul>
+        <br>
+
+        {% endfor %}
+
+
     
 {% endblock content %}

@@ -13,7 +13,6 @@ class Keyword(Base):
     __tablename__ = 'keywords'
     id = Column(Integer, primary_key=True)
     keyword = Column(String, nullable=False, unique=True)
-
     accounts = relationship(
         'Account',
         secondary='user_keywords')
