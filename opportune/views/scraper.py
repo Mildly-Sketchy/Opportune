@@ -4,22 +4,27 @@ from bs4 import BeautifulSoup
 import urllib3
 import pandas as pd
 from pyramid.view import view_config
+from ..models import Account
+from ..models import Keyword
+from ..models import Association
 
 
 @view_config(route_name='jobs', renderer='../templates/email.jinja2')
 def get_jobs(request):
     if request.method == 'POST':
+        query = request.dbsession.query(Keyword)
+        keyword_query = query.filter(Association.user_id == request.authenticated_userid, Association.keyword_id == Keyword.keyword).all()
+        keywords = [keyword.keyword for keyword in keyword_query]
         city = request.POST['city']
-        jobs = request.POST['keyword']
 
         url_template = 'https://www.indeed.com/jobs?q={}&l={}'
         max_results_per_city = 10
 
         df = pd.DataFrame(columns=['location', 'company', 'job_title', 'salary', 'job_link'])
         requests.packages.urllib3.disable_warnings()
-        for job in jobs:
+        for keyword in keywords:
             for start in range(0, max_results_per_city):
-                url = url_template.format(job, city)
+                url = url_template.format(keyword, city)
                 http = urllib3.PoolManager()
                 response = http.request('GET', url)
                 soups = BeautifulSoup(response.data.decode('utf-8'), 'html5lib')
