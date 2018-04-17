@@ -13,3 +13,4 @@ class Association(Base):
     id = Column(Integer, primary_key=True)
     user_id = Column(Integer, ForeignKey('accounts.id'), nullable=False)
     keyword_id = Column(Integer, ForeignKey('keywords.id'), nullable=False)
+ 
