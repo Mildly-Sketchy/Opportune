@@ -9,6 +9,9 @@ with open(os.path.join(here, 'CHANGES.txt')) as f:
     CHANGES = f.read()
 
 requires = [
+    'bs4',
+    'urllib3',
+    'pandas',
     'cryptacular',
     'plaster_pastedeploy',
     'psycopg2-binary',

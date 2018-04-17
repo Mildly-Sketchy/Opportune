@@ -34,7 +34,7 @@ def about_view(request):
 def email_view(request):
     """Email testing."""
     if request.method == 'POST':
-        with open('./Testing.csv') as input_file:
+        with open('./results.csv') as input_file:
             reader = csv.reader(input_file)
             data = list(reader)
         msg = 'Subject: Current Job Listings\n'
