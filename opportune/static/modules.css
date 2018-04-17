@@ -32,11 +32,21 @@
 
 button {
   color: black;
-  font-family: 'Roboto';
   background-color: rgb(255, 147, 7);
   font-size: 1vw;
   height: 40px;
   width: 255px;
+}
+
+.keyword {
+  font-family: 'Roboto';
+  background-color: rgba(0, 206, 252, 0.4);
+  width: inherit;
+}
+
+.keyword::first-letter { 
+    font-size: 150%;
+    color: rgb(255, 0, 0);
 }
 
 .forms {
@@ -49,8 +59,19 @@ button {
   margin: 50px;
 }
 
-form input {
+.updateProfile input {
+  margin-left: 41.25%;
+}
+
+.login, .register, .profile {
+  text-align: center;
+}
+
+form {
   font-family: 'Roboto';
+}
+
+form input {
   text-align: center;
   display: block;
   width: 250px;
@@ -60,13 +81,6 @@ form input {
   margin-left: 10%;
 }
 
-.updateProfile input {
-  margin-left: 41.25%;
-}
-
-.login, .register, .profile {
-  text-align: center;
-}
 
 /*************************************/
 /*Everything below is driving the menu*/

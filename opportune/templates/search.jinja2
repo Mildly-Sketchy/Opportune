@@ -9,13 +9,13 @@
 <form action="{{request.route_url('keywords/delete')}}" method="POST">
   <input type="hidden" name="csrf_token" value="{{request.session.get_csrf_token()}}">
   <input type="hidden" name="keyword" value="{{keyword.keyword}}">
-  <button>{{keyword.keyword}}</button>
+  <button class="keyword">x {{keyword.keyword}}</button>
 </form>
 {% endfor %}
 {% endif %}
 <form action="{{request.route_url('keywords')}}" method="POST">
   <input type="hidden" name="csrf_token" value="{{request.session.get_csrf_token()}}">
-  <input class="keyword" name="keyword" type="text" placeholder="keyword" required>
+  <input class="addKeyword" name="keyword" type="text" placeholder="keyword" required>
   <button>Add Keyword</button>
 </form> 
 <form action="{{request.route_url('search/results')}}" method="POST">
