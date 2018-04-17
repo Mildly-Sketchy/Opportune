@@ -6,8 +6,6 @@ from pyramid.view import view_config
 from ..models import Account, Association
 from . import DB_ERR_MSG
 import csv
-from parse import *
-data = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
 def read_file():
     """read the file and reutnr the data in a suitable format"""
