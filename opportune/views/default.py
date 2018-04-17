@@ -51,8 +51,15 @@ def handle_keywords(request):
 
     if request.method == 'POST':
 
+        keyword = request.POST['keyword']
+
+        if len(keyword.split()) > 1:
+            keyword = keyword.split()
+            keyword = '+'.join(keyword)
+            print(keyword, "**************")
+
         instance = Keyword(
-            keyword=request.POST['keyword'],
+            keyword=keyword,
         )
 
         association = Association(
