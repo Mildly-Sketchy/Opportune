@@ -1,5 +1,4 @@
 import requests
-import bs4
 from bs4 import BeautifulSoup
 import urllib3
 import pandas as pd
@@ -35,7 +34,7 @@ def get_jobs(request):
                 url = url_template.format(keyword, city)
                 http = urllib3.PoolManager()
                 response = http.request('GET', url)
-                soups = BeautifulSoup(response.data.decode('utf-8'), 'html5lib')
+                soups = BeautifulSoup(response.data.decode('utf-8'), 'html.parser')
                 for b in soups.find_all('div', attrs={'class': ' row result'}):
                     location = b.find('span', attrs={'class': 'location'}).text
                     job_title = b.find('a', attrs={'data-tn-element': 'jobTitle'}).text
@@ -45,7 +44,8 @@ def get_jobs(request):
                     try:
                         company = b.find('span', attrs={'class': 'company'}).text
                     except:
-                        company = 'Not Listed'
+                        # probably attribute error
+                         company = 'Not Listed'
                     try:
                         salary = b.find('span', attrs={'class': 'no-wrap'}).text
                     except:

@@ -1,6 +1,7 @@
 import pytest
 from pyramid import testing
 from ..models.meta import Base
+from ..models import Account
 
 
 @pytest.fixture
@@ -40,3 +41,20 @@ def db_session(configuration, request):
 def dummy_request(db_session):
     """Create a dummy GET request with a dbsession."""
     return testing.DummyRequest(dbsession=db_session)
+
+
+@pytest.fixture
+def test_user():
+    """Set up a test user"""
+    return Account(
+        username="testtest",
+        password="testpass",
+        email="test@testthis.com",
+    )
+
+
+@pytest.fixture
+def add_user(dummy_request, test_user):
+    """Add a user to database"""
+    dummy_request.dbsession.add(test_user)
+    return test_user
