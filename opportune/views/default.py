@@ -73,6 +73,20 @@ def handle_keywords(request):
         return HTTPFound(location=request.route_url('email'))
 
 
+@view_config(route_name='keywords/delete', renderer='../templates/email.jinja2')
+def delete_keyword(request):
+    if request.method == 'POST':
+        keyword = request.POST['keyword']
+        user = request.authenticated_userid
+
+        query = request.dbsession.query(Association)
+        removed = query.filter(Association.keyword_id == keyword, Association.user_id == user).one()
+
+        request.dbsession.delete(removed)
+
+        return HTTPFound(location=request.route_url('email'))
+
+
 @view_config(route_name='email', renderer='../templates/email.jinja2')
 def email_view(request):
     """Send email after scraper has run at user request."""

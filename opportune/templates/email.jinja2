@@ -6,7 +6,11 @@
 {% if keywords %}
 <p>Your current keywords:</p>
 {% for keyword in keywords %}
-<p>{{keyword.keyword}}</p>
+<form action="{{request.route_url('keywords/delete')}}" method="POST">
+  <input type="hidden" name="csrf_token" value="{{request.session.get_csrf_token()}}">
+  <input type="hidden" name="keyword" value="{{keyword.keyword}}">
+  <button>{{keyword.keyword}}</button>
+</form>
 {% endfor %}
 {% endif %}
 <form action="{{request.route_url('keywords')}}" method="POST">
