@@ -64,4 +64,3 @@ def test_bad_request_method_auth_signup_view(dummy_request):
     response = auth_view(dummy_request)
     assert response.status_code == 302
     assert isinstance(response, HTTPFound)
-
