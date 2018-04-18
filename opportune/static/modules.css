@@ -113,11 +113,15 @@ form input {
   margin-bottom: 8vw;
 }
 
-#new_results {
+#new-results {
   list-style-type: none;
-  border: 3px solid #8c8c8c;
+  border-style: inset;
+  border-width: 3px 10px 3px 10px;
   border-radius: 5px;
-  padding-bottom: 10px;
+  border-color: black;
+  padding-bottom: 25px;
+  padding-top: 10px;
+  margin: 0px 20px 0px 20px;
 }
 
 /*************************************/

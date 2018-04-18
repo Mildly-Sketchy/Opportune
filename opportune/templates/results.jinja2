@@ -6,9 +6,9 @@
         {% for row in data %}
     <ul id="new-results">
         <li ><pre>{{ row.job_title }}</pre></li>
-        <li>{{ row.company }}</li>
-        <li>{{ row.location }}</li>
-        <li>{{ row.salary }}</li>
+        <li>Company: {{ row.company }}</li>
+        <li>Location: {{ row.location }}</li>
+        <li>Salary: {{ row.salary }}</li>
         <li><a href="{{row.job_link}}">Link to Posting</a></li>
     </ul>
         <br>
@@ -18,3 +18,4 @@
   <button>Email Results</button>
 </form> 
 {% endblock content %}
+ 
