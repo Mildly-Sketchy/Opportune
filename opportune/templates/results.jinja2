@@ -4,12 +4,12 @@
     </div>
     <h1>Results</h1>
         {% for row in data %}
-    <ul>
-        <li>{{ row.job_title }}<br>
-        {{ row.company }}<br>
-        {{ row.location }}<br>
-        {{ row.salary }}<br>
-        {{ row.job_link }}<br></li>
+    <ul id="new-results">
+        <li ><pre>{{ row.job_title }}</pre></li>
+        <li>Company: {{ row.company }}</li>
+        <li>Location: {{ row.location }}</li>
+        <li>Salary: {{ row.salary }}</li>
+        <li><a href="{{row.job_link}}">Link to Posting</a></li>
     </ul>
         <br>
         {% endfor %}
@@ -22,3 +22,4 @@
   <button>Email Results</button>
 </form> 
 {% endblock content %}
+ 
