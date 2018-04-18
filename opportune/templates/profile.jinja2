@@ -19,7 +19,7 @@
     <form action="{{request.route_url('keywords/delete')}}" method="POST">
       <input type="hidden" name="csrf_token" value="{{request.session.get_csrf_token()}}">
       <input type="hidden" name="keyword" value="{{keyword.keyword}}">
-      <button>{{keyword.keyword}}</button>
+      <button class="keyword">x {{keyword.keyword}}</button>
     </form>
     {% endfor %}
     {% endif %}

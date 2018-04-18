@@ -2,13 +2,14 @@ import requests
 from bs4 import BeautifulSoup
 import urllib3
 import pandas as pd
+import csv
 from pyramid.view import view_config
 from ..models import Account
 from ..models import Keyword
 from ..models import Association
 
 
-@view_config(route_name='search/results', renderer='../templates/email.jinja2')
+@view_config(route_name='search/results', renderer='../templates/results.jinja2')
 def get_jobs(request):
     if request.method == 'POST':
 
@@ -43,12 +44,11 @@ def get_jobs(request):
                     job_link = f'{base_url}{href}'
                     try:
                         company = b.find('span', attrs={'class': 'company'}).text
-                    except:
-                        # probably attribute error
-                         company = 'Not Listed'
+                    except AttributeError:
+                        company = 'Not Listed'
                     try:
                         salary = b.find('span', attrs={'class': 'no-wrap'}).text
-                    except:
+                    except AttributeError:
                         salary = 'Not Listed'
                     df = df.append({'location': location, 'company': company, 'job_title': job_title, 'salary': salary, 'job_link': job_link}, ignore_index=True)
 
@@ -56,4 +56,10 @@ def get_jobs(request):
         df.salary.replace(regex=True,inplace=True,to_replace='\n',value='')
         output = df.head(30)
         output.to_csv('results.csv', index=False)
-        return {}
+        results = []
+        with open('./results.csv') as infile:
+            data = csv.DictReader(infile)
+            for row in data:
+                results.append(row)
+
+        return {'data': results}

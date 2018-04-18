@@ -2,8 +2,7 @@
 {% block content %}
     <div class="banner">
     </div>
-    <h1>Admin Analytics</h1>
-
+    <h1>Results</h1>
         {% for row in data %}
     <ul>
         <li id="new-results">
@@ -15,9 +14,9 @@
         </li>
     </ul>
         <br>
-
         {% endfor %}
-
-
-    
+<form class="sendEmail" action="{{request.route_url('search/email')}}" method="POST">
+  <input type="hidden" name="csrf_token" value="{{request.session.get_csrf_token()}}">
+  <button>Email Results</button>
+</form> 
 {% endblock content %}
