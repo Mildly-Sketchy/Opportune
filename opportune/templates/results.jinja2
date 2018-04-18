@@ -13,7 +13,11 @@
     </ul>
         <br>
         {% endfor %}
-<form class="sendEmail" action="{{request.route_url('search/email')}}" method="POST">
+<form class="download" action="{{request.route_url('search/results/download')}}">
+  <input type="hidden" name="csrf_token" value="{{request.session.get_csrf_token()}}">
+  <button>Download Results</button>
+</form> 
+<form class="sendEmail" action="{{request.route_url('search/results/email')}}" method="POST">
   <input type="hidden" name="csrf_token" value="{{request.session.get_csrf_token()}}">
   <button>Email Results</button>
 </form> 
