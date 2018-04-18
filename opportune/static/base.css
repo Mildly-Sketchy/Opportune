@@ -5,6 +5,10 @@ a {
   text-decoration: none;
 }
 
+p {
+    font-family: 'Roboto';
+}
+
 h1 {
   font-family: 'Pacifico';
   font-style: italic;
