@@ -8,6 +8,7 @@ from ..models import Account
 from ..models import Keyword
 from ..models import Association
 from sqlalchemy.exc import DBAPIError
+from pyramid.response import FileResponse
 from . import DB_ERR_MSG
 
 
@@ -65,3 +66,37 @@ def get_jobs(request):
                 results.append(row)
 
         return {'data': results}
+
+
+@view_config(route_name='search/results/email', renderer='../templates/search.jinja2')
+def email_view(request):
+    """Send email after scraper has run at user request."""
+
+    if request.method == 'POST':
+        with open('./results.csv') as input_file:
+            reader = csv.reader(input_file)
+            data = list(reader)
+        msg = 'Subject: Current Job Listings\n'
+        for posting in data:
+            msg += '\n'.join(posting) + '\n'*4
+        mail_from = os.environ.get('TEST_EMAIL')
+        log = os.environ.get('ZZZZZ')
+        query = request.dbsession.query(Account).filter(
+            Account.username == request.authenticated_userid).first()
+        smtpObj = smtplib.SMTP('smtp.gmail.com', 587)
+        smtpObj.ehlo()
+        smtpObj.starttls()
+        smtpObj.login(mail_from, log)
+        smtpObj.sendmail(mail_from, query.email, msg)
+        smtpObj.quit()
+    return {}
+
+
+@view_config(route_name='search/results/download')
+def download_results(request):
+    """Send user their search results as a CSV."""
+    response = FileResponse(
+        './results.csv',
+        request=request,
+        content_type='text/csv')
+    return response
