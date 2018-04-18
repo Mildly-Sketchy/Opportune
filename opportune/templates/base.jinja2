@@ -21,14 +21,15 @@
           <li><a href="{{request.route_url('home')}}">Home</a></li>
           {% if request.authenticated_userid %}
           <li><a href="{{request.route_url('profile')}}">Profile</a></li>
-          <li><a href="{{request.route_url('logout')}}">Log out</a></li>
-          <li><a href="{{request.route_url('analytics')}}">Analytics</a></li>
           <li><a href="{{request.route_url('search')}}">Search</a></li>
           {% else %}
           <li><a href="{{request.route_url('auth')}}">Log in</a></li>
           <li><a href="{{request.route_url('auth')}}">Register</a></li>
           {% endif %}
           <li><a href="{{request.route_url('about')}}">About</a></li>
+          {% if request.authenticated_userid %}
+          <li><a href="{{request.route_url('logout')}}">Log out</a></li>
+          {% endif %}
         </ul>
       </div>
       <h1>Opportune</h1>
@@ -50,8 +51,6 @@
     <li><a href="{{request.route_url('auth')}}">Register</a></li>
     <li><p> | </p></li>
     <li><a href="{{request.route_url('profile')}}">Profile</a></li>
-    <li><p> | </p></li>
-    <li><a href="{{request.route_url('analytics')}}">Analytics</a></li>
     <li><p> | </p></li>
     <li><a href="{{request.route_url('about')}}">About</a></li>
     <li><p> | </p></li>

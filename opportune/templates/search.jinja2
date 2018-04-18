@@ -31,8 +31,4 @@
   <input class="city" name="city" type="text" placeholder="city" required>
   <button>Run Scraper</button>
 </form> 
-<form class="sendEmail" action="{{request.route_url('search/email')}}" method="POST">
-  <input type="hidden" name="csrf_token" value="{{request.session.get_csrf_token()}}">
-  <button>Test Email</button>
-</form>
 {% endblock content %}
