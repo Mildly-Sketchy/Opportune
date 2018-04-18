@@ -2,7 +2,7 @@ from pyramid.view import view_config
 from pyramid.security import NO_PERMISSION_REQUIRED
 from pyramid.httpexceptions import HTTPFound, HTTPBadRequest
 from pyramid.response import Response
-from sqlalchemy.exc import DBAPIError
+from sqlalchemy.exc import DBAPIError, DataError
 from ..models import Account
 from ..models import Keyword
 from ..models import Association
@@ -27,10 +27,11 @@ def profile_view(request):
                 query = request.dbsession.query(Keyword)
                 user_keywords = query.filter(Association.user_id == request.authenticated_userid, Association.keyword_id == Keyword.keyword)
             except DBAPIError:
-                raise DBAPIError(DB_ERR_MSG, content_type='text/plain', status=500)
-
-            keywords = [keyword.keyword for keyword in user_keywords]
-            if len(keywords) < 1:
+                return Response(DB_ERR_MSG, content_type='text/plain', status=500)
+            # THE NEXT FOUR LINES ARE REALLY REALLY HACKY, FIX IT
+            try:
+                keywords = [keyword.keyword for keyword in user_keywords]
+            except DataError:
                 return{'message': 'You do not have any keywords saved. Add one!'}
 
             return{'keywords': user_keywords}
@@ -76,8 +77,10 @@ def search_view(request):
             except DBAPIError:
                 raise DBAPIError(DB_ERR_MSG, content_type='text/plain', status=500)
 
-            keywords = [keyword.keyword for keyword in user_keywords]
-            if len(keywords) < 1:
+            # THE NEXT FOUR LINES ARE REALLY REALLY HACKY, FIX IT
+            try:
+                keywords = [keyword.keyword for keyword in user_keywords]
+            except DataError:
                 return{'message': 'You do not have any keywords saved. Add one!'}
 
             return{'keywords': user_keywords}
