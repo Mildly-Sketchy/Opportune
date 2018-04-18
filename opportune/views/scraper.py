@@ -57,7 +57,8 @@ def get_jobs(request):
 
         df.company.replace(regex=True,inplace=True,to_replace='\n',value='')
         df.salary.replace(regex=True,inplace=True,to_replace='\n',value='')
-        output = df.head(30)
+        cleaned = df.drop_duplicates(['job_link'])
+        output = cleaned.head(30)
         output.to_csv('results.csv', index=False)
         results = []
         with open('./results.csv') as infile:
