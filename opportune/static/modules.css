@@ -13,6 +13,14 @@
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
+.keywordList {
+  list-style-type: none;
+  text-align: center;
+}
+
+.keywordList li {
+  display: inline-block;
+}
 
 .fa-gem, .fa-hourglass, .fa-laptop {
   padding-top: 10px;
@@ -32,11 +40,21 @@
 
 button {
   color: black;
-  font-family: 'Roboto';
   background-color: rgb(255, 147, 7);
   font-size: 1vw;
   height: 40px;
   width: 255px;
+}
+
+.keyword {
+  font-family: 'Roboto';
+  background-color: rgba(0, 206, 252, 0.4);
+  width: inherit;
+}
+
+.keyword::first-letter { 
+    font-size: 150%;
+    color: rgb(255, 0, 0);
 }
 
 .forms {
@@ -49,8 +67,39 @@ button {
   margin: 50px;
 }
 
-form input {
+.updateProfile input {
+  margin-left: 41.25%;
+}
+
+.scraper {
+  text-align: center;
+}
+
+.scraper input {
+  margin-left: 41.25%;
+}
+
+.login, .register, .profile {
+  text-align: center;
+}
+
+.searchKeywords {
+  text-align:center;
+}
+
+.addKeyword {
+  text-align: center;
+}
+
+.addKeyword input {
+  margin-left: 41.25%;
+}
+
+form {
   font-family: 'Roboto';
+}
+
+form input {
   text-align: center;
   display: block;
   width: 250px;
@@ -60,12 +109,8 @@ form input {
   margin-left: 10%;
 }
 
-.updateProfile input {
-  margin-left: 41.25%;
-}
-
-.login, .register, .profile {
-  text-align: center;
+.sendEmail {
+  margin-bottom: 7vw;
 }
 
 /*************************************/
