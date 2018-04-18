@@ -39,7 +39,7 @@ def auth_view(request):
             else:
                 return {'message': 'That username is already in use.'}
 
-            return HTTPFound(location=request.route_url('profile'), headers=headers)
+            return HTTPFound(location=request.route_url('search'), headers=headers)
 
         except DBAPIError:
             return Response(DB_ERR_MSG, content_type='text/plain', status=500)
@@ -55,7 +55,7 @@ def auth_view(request):
         is_authenticated = Account.check_credentials(request, username, password)
         if is_authenticated[0]:
             headers = remember(request, userid=username)
-            return HTTPFound(location=request.route_url('profile'), headers=headers)
+            return HTTPFound(location=request.route_url('search'), headers=headers)
         else:
             return HTTPUnauthorized()
 
