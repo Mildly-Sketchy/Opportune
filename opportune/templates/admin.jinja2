@@ -6,11 +6,13 @@
 
         {% for row in data %}
     <ul>
-        <li>{{ row.job_title }}<br>
+        <li id="new-results">
+        <pre>{{ row.job_title }}</pre>
         {{ row.company }}<br>
         {{ row.location }}<br>
         {{ row.salary }}<br>
-        {{ row.job_link }}<br></li>
+        {{ row.job_link }}<br>
+        </li>
     </ul>
         <br>
 
