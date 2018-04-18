@@ -11,5 +11,6 @@ def includeme(config):
     config.add_route('search/email', '/search/email')
     config.add_route('search/results', '/search/results')
     config.add_route('jobs', '/jobs')
+    config.add_route('stat', '/stat')
     config.add_route('keywords', '/keywords')
     config.add_route('keywords/delete', '/keywords/delete')
