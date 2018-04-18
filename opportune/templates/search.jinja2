@@ -1,29 +1,37 @@
 {% extends "base.jinja2" %}
 {% block content %}
+<div class="searchKeywords">
+<h2>Search for Jobs</h2>
 {% if message %}
 <p>{{message}}</p>
 {% endif %}
 {% if keywords %}
-<p>Your current keywords:</p>
+<p>Your saved keywords:</p>
+<ul class="keywordList">
 {% for keyword in keywords %}
-<form action="{{request.route_url('keywords/delete')}}" method="POST">
+<li>
+  <form action="{{request.route_url('keywords/delete')}}" method="POST">
   <input type="hidden" name="csrf_token" value="{{request.session.get_csrf_token()}}">
   <input type="hidden" name="keyword" value="{{keyword.keyword}}">
   <button class="keyword">x {{keyword.keyword}}</button>
 </form>
+</li>
 {% endfor %}
+</ul>
 {% endif %}
-<form action="{{request.route_url('keywords')}}" method="POST">
+</div>
+<form class="addKeyword" action="{{request.route_url('keywords')}}" method="POST">
   <input type="hidden" name="csrf_token" value="{{request.session.get_csrf_token()}}">
   <input class="addKeyword" name="keyword" type="text" placeholder="keyword" required>
   <button>Add Keyword</button>
 </form> 
-<form action="{{request.route_url('search/results')}}" method="POST">
+<form class="scraper" action="{{request.route_url('search/results')}}" method="POST">
+  <p>Enter your city to get jobs with your saved keywords.</p>
   <input type="hidden" name="csrf_token" value="{{request.session.get_csrf_token()}}">
   <input class="city" name="city" type="text" placeholder="city" required>
   <button>Run Scraper</button>
 </form> 
-<form action="{{request.route_url('search/email')}}" method="POST">
+<form class="sendEmail" action="{{request.route_url('search/email')}}" method="POST">
   <input type="hidden" name="csrf_token" value="{{request.session.get_csrf_token()}}">
   <button>Test Email</button>
 </form>
