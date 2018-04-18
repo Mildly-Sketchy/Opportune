@@ -38,10 +38,3 @@ def test_default_behavior_of_email_view(dummy_request):
     response = email_view(dummy_request)
     assert len(response) == 0
     assert type(response) == dict
-
-
-# def test_default_behavior_of_search(dummy_request):
-#     """Test default for search behavior"""
-#     from ..views.default import search_view
-#     response = search_view(dummy_request)
-#     assert user_keywords('Seattle') == Seattle
