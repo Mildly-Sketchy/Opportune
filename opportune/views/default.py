@@ -59,12 +59,6 @@ def delete_keyword_profile(request):
             return Response(DB_ERR_MSG, content_type='text/plain', status=500)
 
 
-@view_config(route_name='analytics', renderer='../templates/admin.jinja2')
-def analytics_view(request):
-    """Return employer analytics."""
-    return {}
-
-
 @view_config(route_name='about', renderer='../templates/about.jinja2',
              permission=NO_PERMISSION_REQUIRED)
 def about_view(request):
