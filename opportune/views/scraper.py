@@ -17,8 +17,10 @@ def get_jobs(request):
 
         try:
             query = request.dbsession.query(Keyword)
+            # authenticated_userid, trying to compare a number and a string
             keyword_query = query.filter(Association.user_id == request.authenticated_userid, Association.keyword_id == Keyword.keyword).all()
             keywords = [keyword.keyword for keyword in keyword_query]
+            # wrong error
         except DBAPIError:
             raise DBAPIError(DB_ERR_MSG, content_type='text/plain', status=500)
 

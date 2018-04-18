@@ -2,11 +2,11 @@ from pyramid import testing
 # from pyramid.response import Response
 
 
-# def test_default_behavior_of_base_view(dummy_request):
-#     """Test default homepage behavior."""
-#     from ..views.default import home_view
-#     response = home_view(dummy_request)
-#     assert type(response) == dict
+def test_default_behavior_of_base_view(dummy_request):
+    """Test default homepage behavior."""
+    from ..views.default import home_view
+    response = home_view(dummy_request)
+    assert type(response) == dict
 
 
 # def test_default_behavior_of_profile_view(dummy_request):
@@ -14,6 +14,11 @@ from pyramid import testing
 #     from ..views.default import profile_view
 #     response = profile_view(dummy_request)
 #     assert type(response) == dict
+
+
+def test_delete_keywords(dummy_request):
+    """Test delete keywords"""
+    pass
 
 
 # def test_default_behavior_of_analytics_view(dummy_request):

@@ -3,7 +3,7 @@ import os
 
 
 def substitute_urllib_get_request(self, method, url):
-    # response.data.decode('utf-8')
+    """Mock response from Indeed website from urllib3."""
     class DummyResponse:
         class Data:
             def decode(self, encoding):
