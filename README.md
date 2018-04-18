@@ -73,7 +73,9 @@ Three SQL databases are used for persistence to store job postings and user data
 
 #### Day 3
 
-04/18/2018 0900 -
+04/18/2018 0900 - Merge developmenent branch to master branch, redeploy
+
+04/18/2018 0930 - 
 
 #### Day 4
 
