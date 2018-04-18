@@ -7,6 +7,8 @@ from pyramid.view import view_config
 from ..models import Account
 from ..models import Keyword
 from ..models import Association
+from sqlalchemy.exc import DBAPIError
+from . import DB_ERR_MSG
 
 
 @view_config(route_name='search/results', renderer='../templates/results.jinja2')
