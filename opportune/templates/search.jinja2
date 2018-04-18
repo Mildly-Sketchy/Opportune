@@ -2,8 +2,12 @@
 {% block content %}
 <div class="searchKeywords">
 <h2>Search for Jobs</h2>
+
 {% if message %}
 <p>{{message}}</p>
+{% endif %}
+{% if error %}
+<p>{{error}}</p>
 {% endif %}
 {% if keywords %}
 <p>Your saved keywords:</p>

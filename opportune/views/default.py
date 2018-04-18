@@ -93,9 +93,13 @@ def handle_keywords(request):
         except KeyError:
             return HTTPBadRequest()
 
-        if len(keyword.split()) > 1:
-            keyword = keyword.split()
-            keyword = '+'.join(keyword)
+        try:
+            keyword = int(keyword)
+            return {'error': 'Search term cannot be a number.'}
+        except ValueError:
+            if len(keyword.split()) > 1:
+                keyword = keyword.split()
+                keyword = '+'.join(keyword)
 
         instance = Keyword(
             keyword=keyword
