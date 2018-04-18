@@ -4,14 +4,12 @@
     </div>
     <h1>Results</h1>
         {% for row in data %}
-    <ul>
-        <li id="new-results">
-        <pre>{{ row.job_title }}</pre>
-        {{ row.company }}<br>
-        {{ row.location }}<br>
-        {{ row.salary }}<br>
-        {{ row.job_link }}<br>
-        </li>
+    <ul id="new-results">
+        <li ><pre>{{ row.job_title }}</pre></li>
+        <li>{{ row.company }}</li>
+        <li>{{ row.location }}</li>
+        <li>{{ row.salary }}</li>
+        <li>{{ row.job_link }}</li>
     </ul>
         <br>
         {% endfor %}
