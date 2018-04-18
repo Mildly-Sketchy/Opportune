@@ -227,3 +227,7 @@ a:hover
 {
   transform: none;
 }
+
+#bokeh {
+  margin-left: 30%;
+}

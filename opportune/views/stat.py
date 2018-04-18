@@ -11,22 +11,23 @@ from bokeh.embed import components
 def stat_view(request):
     relationships = request.dbsession.query(Association)
     count = {}
-    keys = request.dbsession.query(Keyword)
     for each in relationships:
-        word = keys.get(each.keyword_id).keyword
+        word = each.keyword_id
         if word not in count:
             count[word] = 1
         else:
             count[word] += 1
+    top = 1
+    for value in count.values():
+        if top <= value:
+            top = value * 1.5
     users = list(count.values())
     keywords = list(count.keys())
     source = ColumnDataSource(data=dict(keywords=keywords, users=users))
-    p = figure(x_range=keywords, y_range=(0, 5), plot_height=250,
-               title="Search Counts")
-    p.vbar(x='keywords', top='users', width=0.9, legend="keywords",
+    p = figure(x_range=keywords, y_range=(0, top), plot_height=500,
+               title="Current Stored Searches")
+    p.vbar(x='keywords', top='users', width=0.9, legend=False,
            source=source)
     p.xgrid.grid_line_color = None
-    p.legend.orientation = "horizontal"
-    p.legend.location = "top_center"
     script, div = components(p)
     return {'script': script, 'div': div}
