@@ -1,7 +1,5 @@
 from pyramid.view import view_config
 from pyramid.security import NO_PERMISSION_REQUIRED
-from ..models import Keyword
-from ..models import Association
 
 
 @view_config(route_name='home', renderer='../templates/index.jinja2',

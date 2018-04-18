@@ -34,7 +34,7 @@ def test_default_behavior_of_about_view(dummy_request):
 
 def test_default_behavior_of_email_view(dummy_request):
     """Test default email view behavior."""
-    from ..views.default import email_view
+    from ..views.scraper import email_view
     response = email_view(dummy_request)
     assert len(response) == 0
     assert type(response) == dict

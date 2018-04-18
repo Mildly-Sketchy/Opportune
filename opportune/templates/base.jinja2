@@ -48,15 +48,22 @@
   <ul id="footerMenu">
     <li><a href="{{request.route_url('home')}}">Home</a></li>
     <li><p> | </p></li>
-    <li><a href="{{request.route_url('auth')}}">Log In</a></li>
+    {% if request.authenticated_userid %}
+    <li><a href="{{request.route_url('profile')}}">Profile</a></li>
+    <li><p> | </p></li>
+    <li><a href="{{request.route_url('search')}}">Search</a></li>
+    <li><p> | </p></li>
+    {% else %}
+    <li><a href="{{request.route_url('auth')}}">Log in</a></li>
     <li><p> | </p></li>
     <li><a href="{{request.route_url('auth')}}">Register</a></li>
     <li><p> | </p></li>
-    <li><a href="{{request.route_url('profile')}}">Profile</a></li>
-    <li><p> | </p></li>
+    {% endif %}
     <li><a href="{{request.route_url('about')}}">About</a></li>
     <li><p> | </p></li>
-    <li><a href="{{request.route_url('search')}}">Search</a></li>
+    {% if request.authenticated_userid %}
+    <li><a href="{{request.route_url('logout')}}">Log out</a></li>
+    {% endif %}
   </ul>
 </footer>
 <script defer src="https://use.fontawesome.com/releases/v5.0.10/js/all.js" integrity="sha384-slN8GvtUJGnv6ca26v8EzVaR9DC58QEwsIk9q1QXdCU8Yu8ck/tL/5szYlBbqmS+" crossorigin="anonymous"></script>
