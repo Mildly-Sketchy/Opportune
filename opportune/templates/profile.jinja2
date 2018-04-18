@@ -3,10 +3,17 @@
     <div class="profile container">
     <h1>Profile</h1>
     <h3>Update your profile</h3>
-    <form class="updateProfile" method="PUT">
+    {% if alert %}
+    {{alert}}
+    {% endif %}
+    <form class="updateProfile" action="{{request.route_url('profile/update')}}" method="POST">
+          <input type="hidden" name="csrf_token" value="{{request.session.get_csrf_token()}}">
           <input class="email" name="email" type="text" placeholder="email@address.com" required>
-          <input class="password" name="password" type="password" placeholder="password" required>
-          <button type="submit">Update Profile</button>
+          <button type="submit">Update Email</button>
+    </form>
+    <form class="deleteAccount" action="{{request.route_url('profile/delete')}}" method="POST">
+          <input type="hidden" name="csrf_token" value="{{request.session.get_csrf_token()}}">
+          <button type="submit">Delete Account</button>
     </form>
     <h3>Edit your keywords</h3>
     {% if message %}
@@ -16,13 +23,12 @@
     {% if keywords %}
     <p>Your current keywords:</p>
     {% for keyword in keywords %}
-    <form action="{{request.route_url('keywords/delete')}}" method="POST">
+    <form action="{{request.route_url('profile/keywords/delete')}}" method="POST">
       <input type="hidden" name="csrf_token" value="{{request.session.get_csrf_token()}}">
       <input type="hidden" name="keyword" value="{{keyword.keyword}}">
       <button class="keyword">x {{keyword.keyword}}</button>
     </form>
     {% endfor %}
     {% endif %}
-
   </div>
 {% endblock content %}
