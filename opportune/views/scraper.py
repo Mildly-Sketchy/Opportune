@@ -1,8 +1,5 @@
 import requests
 from bs4 import BeautifulSoup
-import urllib3
-import pandas as pd
-import csv
 from pyramid.view import view_config
 from ..models import Account
 from ..models import Keyword
@@ -10,6 +7,12 @@ from ..models import Association
 from sqlalchemy.exc import DBAPIError
 from pyramid.response import FileResponse
 from . import DB_ERR_MSG
+import urllib3
+import pandas as pd
+import csv
+import smtplib
+import os
+import csv
 
 
 @view_config(route_name='search/results', renderer='../templates/results.jinja2')
