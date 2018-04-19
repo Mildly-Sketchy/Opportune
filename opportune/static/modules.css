@@ -113,6 +113,17 @@ form input {
   margin-bottom: 8vw;
 }
 
+#new-results {
+  list-style-type: none;
+  border-style: inset;
+  border-width: 3px 10px 3px 10px;
+  border-radius: 5px;
+  border-color: black;
+  padding-bottom: 25px;
+  padding-top: 10px;
+  margin: 0px 20px 0px 20px;
+}
+
 /*************************************/
 /*Everything below is driving the menu*/
 /*************************************/
@@ -227,3 +238,8 @@ a:hover
 {
   transform: none;
 }
+
+#bokeh
+{
++  margin-left: 30%;
++}
