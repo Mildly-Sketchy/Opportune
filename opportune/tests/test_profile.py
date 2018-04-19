@@ -65,13 +65,13 @@ def test_profile_update_email(dummy_request):
     assert isinstance(response, HTTPBadRequest)
 
 
-<<<<<<< HEAD
 def test_profile_delete_keyword_profile_works(dummy_request):
     '''Test delete keyword behaviour'''
     from ..views.profile import delete_keyword_profile
     from ..models.accounts import Account
     from ..models.keywords import Keyword
     from ..models.association import Association
+    from pyramid.httpexceptions import HTTPFound
 
     config = testing.setUp()
     config.include('opportune.routes')
@@ -103,7 +103,8 @@ def test_profile_delete_keyword_profile_works(dummy_request):
     dummy_request.POST = {'keyword': 'developer'}
 
     response = delete_keyword_profile(dummy_request)
-    assert response.status_code == 200
+    assert response.status_code == 302
+    assert isinstance(response, HTTPFound)
 
 
 def test_profile_delete_keyword_bad_request(dummy_request):

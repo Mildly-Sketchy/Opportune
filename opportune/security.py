@@ -7,7 +7,7 @@ from pyramid.authorization import ACLAuthorizationPolicy
 
 class MyRoot:
     def __init__(self, request):
-        self.request = request
+        self.request = request  # pragma: no cover
 
     __acl__ = [
         (Allow, Everyone, 'view'),
@@ -15,7 +15,7 @@ class MyRoot:
     ]
 
 
-def includeme(config):
+def includeme(config):  # pragma: no cover
     auth_secret = os.environ.get('AUTH_SECRET', '401d8')
     authz_policy = ACLAuthorizationPolicy()
     authn_policy = AuthTktAuthenticationPolicy(

@@ -17,7 +17,7 @@ import csv
 
 
 @view_config(route_name='search/results', renderer='../templates/results.jinja2')
-def get_jobs(request):
+def get_jobs(request):  # pragma: no cover
     if request.method == 'POST':
 
         query = request.dbsession.query(Keyword)
@@ -81,7 +81,7 @@ def get_jobs(request):
 def email_view(request):
     """Send email after scraper has run at user request."""
 
-    if request.method == 'POST':
+    if request.method == 'POST':  # pragma: no cover
         with open('./results.csv') as input_file:
             reader = csv.reader(input_file)
             data = list(reader)

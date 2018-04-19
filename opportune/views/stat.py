@@ -1,11 +1,9 @@
 from pyramid.view import view_config
-from pyramid.httpexceptions import HTTPUnauthorized, HTTPFound
+from pyramid.httpexceptions import HTTPUnauthorized
 from ..models import Association, Account
 from bokeh.models import ColumnDataSource
 from bokeh.plotting import figure
 from bokeh.embed import components
-from sqlalchemy.exc import DBAPIError
-from . import DB_ERR_MSG
 
 
 @view_config(route_name='stat', renderer='../templates/stat.jinja2',
@@ -13,12 +11,8 @@ from . import DB_ERR_MSG
 def stat_view(request):
     try:
         query = request.dbsession.query(Account)
-<<<<<<< HEAD
-        admin = query.filter(Account.username == request.authenticated_userid).one()
-
-=======
         admin = query.filter(Account.username == request.authenticated_userid).one_or_none()
->>>>>>> 3613b24fbfbc87e9fd19b8c80f61bf7e1fc70c2c
+
         if admin.admin is True:
             relationships = request.dbsession.query(Association)
             count = {}
