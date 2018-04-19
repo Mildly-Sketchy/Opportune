@@ -42,3 +42,11 @@ def test_default_behavior_of_scraper(dummy_request, monkeypatch):
     response = get_jobs(dummy_request)
     # assert len(response) == 0
     assert type(response) == dict
+
+
+def test_default_behavior_of_email_view(dummy_request):
+    """Test default email view behavior."""
+    from ..views.scraper import email_view
+    response = email_view(dummy_request)
+    assert len(response) == 0
+    assert type(response) == dict
