@@ -13,19 +13,14 @@ from . import DB_ERR_MSG
 def profile_view(request):
     """Return profile settings page."""
     if request.method == 'GET':
-            try:
-                query = request.dbsession.query(Keyword)
-                user_keywords = query.filter(Association.user_id == request.authenticated_userid, Association.keyword_id == Keyword.keyword)
-            except KeyError:
-                return HTTPBadRequest()
-            # except DBAPIError:
-            #     raise DBAPIError(DB_ERR_MSG, content_type='text/plain', status=500)
+        query = request.dbsession.query(Keyword)
+        user_keywords = query.filter(Association.user_id == request.authenticated_userid, Association.keyword_id == Keyword.keyword)
 
-            keywords = [keyword.keyword for keyword in user_keywords]
-            if len(keywords) < 1:
-                return{'message': 'You do not have any keywords saved. Add one!'}
+        keywords = [keyword.keyword for keyword in user_keywords]
+        if len(keywords) < 1:
+            return{'message': 'You do not have any keywords saved. Add one!'}
 
-            return{'keywords': user_keywords}
+        return{'keywords': user_keywords}
 
 
 @view_config(route_name='profile/update', renderer='../templates/profile.jinja2')
@@ -35,11 +30,11 @@ def update_email(request):
         updated_email = request.POST['email']
     except KeyError:
         return HTTPBadRequest()
-    try:
+    try:  # pragma: no cover
         query = request.dbsession.query(Account)
         user = query.filter(Account.username == request.authenticated_userid).one()
         user.email = updated_email
-    except DBAPIError:
+    except DBAPIError:  # pragma: no cover
         return Response(DB_ERR_MSG, content_type='text/plain', status=500)
 
     return HTTPFound(location=request.route_url('profile'))
@@ -48,13 +43,13 @@ def update_email(request):
 @view_config(route_name='profile/delete', renderer='../templates/profile.jinja2')
 def delete_account(request):
     """Allow user to update email address."""
-    try:
+    try:  # pragma: no cover
         query = request.dbsession.query(Account)
         removed = query.filter(Account.username == request.authenticated_userid).one()
         request.dbsession.delete(removed)
 
         return HTTPFound(location=request.route_url('logout'))
-    except KeyError:
+    except KeyError:  # pragma: no cover
         return HTTPBadRequest()
 
     return HTTPFound(location=request.route_url('home'))
@@ -79,5 +74,5 @@ def delete_keyword_profile(request):
 
             return HTTPFound(location=request.route_url('profile'))
 
-        except DBAPIError:
-            return Response(DB_ERR_MSG, content_type='text/plain', status=500)
+        except DBAPIError:  # pragma: no cover
+            return Response(DB_ERR_MSG, content_type='text/plain', status=500)  # pragma: no cover

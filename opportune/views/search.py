@@ -78,8 +78,7 @@ def delete_keyword(request):
         except KeyError:
             return HTTPBadRequest()
 
-        try:
-
+        try:  # pragma: no cover
             query = request.dbsession.query(Association)
             removed = query.filter(Association.keyword_id == keyword, Association.user_id == user).one()
 
@@ -87,5 +86,5 @@ def delete_keyword(request):
 
             return HTTPFound(location=request.route_url('search'))
 
-        except DBAPIError:
+        except DBAPIError:  # pragma: no cover
             return Response(DB_ERR_MSG, content_type='text/plain', status=500)

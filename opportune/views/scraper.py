@@ -17,15 +17,12 @@ import csv
 
 
 @view_config(route_name='search/results', renderer='../templates/results.jinja2')
-def get_jobs(request):
+def get_jobs(request):  # pragma: no cover
     if request.method == 'POST':
 
-        try:
-            query = request.dbsession.query(Keyword)
-            keyword_query = query.filter(Association.user_id == request.authenticated_userid, Association.keyword_id == Keyword.keyword).all()
-            keywords = [keyword.keyword for keyword in keyword_query]
-        except DBAPIError:
-            raise DBAPIError(DB_ERR_MSG, content_type='text/plain', status=500)
+        query = request.dbsession.query(Keyword)
+        keyword_query = query.filter(Association.user_id == request.authenticated_userid, Association.keyword_id == Keyword.keyword).all()
+        keywords = [keyword.keyword for keyword in keyword_query]
 
         try:
             city = request.POST['city']
@@ -84,7 +81,7 @@ def get_jobs(request):
 def email_view(request):
     """Send email after scraper has run at user request."""
 
-    if request.method == 'POST':
+    if request.method == 'POST':  # pragma: no cover
         with open('./results.csv') as input_file:
             reader = csv.reader(input_file)
             data = list(reader)
