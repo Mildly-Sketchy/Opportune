@@ -38,12 +38,22 @@
   font-family: 'Pacifico';
 }
 
+.profile {
+  margin-bottom: 8vw;
+}
+
 button {
   color: black;
   background-color: rgb(255, 147, 7);
   font-size: 1vw;
   height: 40px;
   width: 255px;
+  transition: all 0.4s ease-in-out;
+}
+
+button:hover {
+  background-color: rgb(0, 206, 252);
+  transition: all 0.4s ease-in-out;
 }
 
 .keyword {
@@ -60,6 +70,7 @@ button {
 .forms {
   list-style-type: none;
   margin-left: 20%;
+  margin-bottom: 8vw;
 }
 
 .forms li {
@@ -73,6 +84,7 @@ button {
 
 .scraper {
   text-align: center;
+  margin-bottom: 8vw;
 }
 
 .scraper input {
@@ -109,8 +121,16 @@ form input {
   margin-left: 10%;
 }
 
-.sendEmail {
-  margin-bottom: 8vw;
+.resultsButtons {
+  margin-left: 38%;
+}
+
+.resultsButtons ul {
+  list-style-type: none;
+}
+
+.resultsButtons li {
+  display: inline-block;
 }
 
 #new-results {
