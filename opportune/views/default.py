@@ -152,6 +152,7 @@ def email_view(request):
         with open('./results.csv') as input_file:
             reader = csv.reader(input_file)
             data = list(reader)
+        data.pop(0)
         msg = 'Subject: Current Job Listings\n'
         for posting in data:
             msg += '\n'.join(posting) + '\n'*4
