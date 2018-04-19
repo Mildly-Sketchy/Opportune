@@ -18,23 +18,21 @@ def test_profile_view_with_no_keywords(dummy_request):
 
 
 # 
-# def test_profile_view_dbapierror(dummy_request, db_session, test_user):
-#     '''Test hits dbapierror'''
+# def test_profile_view_keyerror(dummy_request, db_session, test_user):
+#     '''Test hits keyerror'''
 #     from ..views.profile import profile_view
-#     from sqlalchemy.exc import DBAPIError
-#     db_session.add(test_user)
+#     from pyramid.httpexceptions import HTTPBadRequest
 
-#     try:
-#         raise DBAPIError
+#     dummy_request.method = 'GET'
+#     response = profile_view(dummy_request)
+#     # assert response.status_code == 400
+#     assert isinstance(response, HTTPBadRequest)
 
-#     except DBAPIError:
-#         assert 
-
-#     # dummy_request.POST = {'username': 'testtest', 'password': 'wrongpass', 'email': 'test@testthis.com'}
-#     # import pdb; pdb.set_trace()
-#     # dummy_request.method = 'POST'
-#     # response = profile_view(dummy_request)
-#     # assert isinstance(response, DBAPIError)
+    # dummy_request.POST = {'username': 'testtest', 'password': 'wrongpass', 'email': 'test@testthis.com'}
+    # import pdb; pdb.set_trace()
+    # dummy_request.method = 'POST'
+    # response = profile_view(dummy_request)
+    # assert isinstance(response, DBAPIError)
 
 
 def test_profile_view_gets_keywords(dummy_request):
