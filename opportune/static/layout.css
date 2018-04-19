@@ -21,12 +21,12 @@ footer {
   list-style: none;
   height: 7vw;
   font-family: 'Pacifico';
-  position: fixed;
+/*  position: fixed;*/
   font-size: 1.75vw;
   font-style: italic;
   text-align: center;
-  left: 0;
-  bottom: 0;
+/*  left: 0;
+  bottom: 0;*/
   width: 100%;
 }
 

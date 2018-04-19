@@ -14,13 +14,16 @@
     </ul>
         <br>
         {% endfor %}
-<form class="download" action="{{request.route_url('search/results/download')}}">
+<div class="resultsButtons">
+<ul>
+<li><form class="download" action="{{request.route_url('search/results/download')}}">
   <input type="hidden" name="csrf_token" value="{{request.session.get_csrf_token()}}">
   <button>Download Results</button>
-</form> 
-<form class="sendEmail" action="{{request.route_url('search/results/email')}}" method="POST">
+</form> </li>
+<li><form class="sendEmail" action="{{request.route_url('search/results/email')}}" method="POST">
   <input type="hidden" name="csrf_token" value="{{request.session.get_csrf_token()}}">
   <button>Email Results</button>
-</form> 
+</form> </li>
+</div>
 {% endblock content %}
  
