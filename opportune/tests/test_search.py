@@ -13,6 +13,15 @@ def test_search_view_no_keywords(dummy_request):
     assert type(response) == dict
 
 
+def test_search_view_with_no_keywords(dummy_request):
+    """Test search view with no keywords"""
+    from ..views.search import search_view
+
+    dummy_request.method = 'GET'
+    response = search_view(dummy_request)
+    assert response == {'message': 'You do not have any keywords saved. Add one!'}
+
+
 def test_handle_keywords_view_bad_request(dummy_request):
     '''test handle keywords bad request'''
     from ..views.search import handle_keywords
@@ -33,6 +42,16 @@ def test_handle_keywords_gets_keyword(dummy_request):
     dummy_request.method = 'POST'
     response = handle_keywords(dummy_request)
     assert isinstance(response, HTTPFound)
+
+
+def test_handle_keywords_number_as_a_keyword_throws_error(dummy_request):
+    '''test that a number throws the correct error'''
+    from ..views.search import handle_keywords
+
+    dummy_request.POST = {'keyword': '4'}
+    dummy_request.method = 'POST'
+    response = handle_keywords(dummy_request)
+    assert response == {'error': 'Search term cannot be a number.'}
 
 
 def test_delete_keyword_view_bad_request(dummy_request):

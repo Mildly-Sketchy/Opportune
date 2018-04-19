@@ -44,6 +44,16 @@ def test_default_behavior_of_scraper(dummy_request, monkeypatch):
     assert type(response) == dict
 
 
+def test_scraper_bad_request(dummy_request):
+    from ..views.scraper import get_jobs
+    from pyramid.httpexceptions import HTTPBadRequest
+
+    dummy_request.method = 'POST'
+    response = get_jobs(dummy_request)
+    assert response.status_code == 400
+    assert isinstance(response, HTTPBadRequest)
+
+
 def test_default_behavior_of_email_view(dummy_request):
     """Test default email view behavior."""
     from ..views.scraper import email_view

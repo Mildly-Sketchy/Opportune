@@ -56,7 +56,18 @@ def test_profile_view_gets_keywords(dummy_request):
     assert response['keywords'][0].keyword == 'developer'
 
 
-# def test_profile_delete_keyword_works(dummy_request):
+def test_profile_update_email(dummy_request):
+    '''Test bad attempt update email'''
+    from ..views.profile import update_email
+    from pyramid.httpexceptions import HTTPBadRequest
+
+    dummy_request.method = 'POST'
+    response = update_email(dummy_request)
+    assert response.status_code == 400
+    assert isinstance(response, HTTPBadRequest)
+
+
+# def test_profile_delete_keyword_profile_works(dummy_request):
 #     '''Test delete keyword behaviour'''
 #     from ..views.profile import delete_keyword_profile
 #     from pyramid.httpexceptions import HTTPFound

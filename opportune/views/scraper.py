@@ -6,6 +6,7 @@ from ..models import Keyword
 from ..models import Association
 from sqlalchemy.exc import DBAPIError
 from pyramid.response import FileResponse
+from pyramid.httpexceptions import HTTPBadRequest
 from . import DB_ERR_MSG
 import urllib3
 import pandas as pd
