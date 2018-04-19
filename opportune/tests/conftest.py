@@ -50,6 +50,7 @@ def test_user():
         username="testtest",
         password="testpass",
         email="test@testthis.com",
+        admin=True,
     )
 
 

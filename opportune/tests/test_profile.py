@@ -65,6 +65,7 @@ def test_profile_update_email(dummy_request):
     assert isinstance(response, HTTPBadRequest)
 
 
+<<<<<<< HEAD
 def test_profile_delete_keyword_profile_works(dummy_request):
     '''Test delete keyword behaviour'''
     from ..views.profile import delete_keyword_profile

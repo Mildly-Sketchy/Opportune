@@ -71,13 +71,3 @@ def test_file_download_type(dummy_request):
     from ..views.scraper import download_results
     response = download_results(dummy_request)
     assert response.content_type == 'text/csv'
-
-
-# def test_scraper_output(dummy_request, monkeypatch):
-#     from ..views.scraper import get_jobs
-#     from urllib3 import PoolManager
-#     monkeypatch.setattr(PoolManager, 'request', substitute_urllib_get_request)
-
-#     dummy_request.method = 'POST'
-#     dummy_request.POST = {'city': 'seattle', 'keyword': 'python'}
-#     response = get_jobs(dummy_request)

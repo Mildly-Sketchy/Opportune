@@ -1,5 +1,5 @@
 from pyramid.view import view_config
-from pyramid.httpexceptions import HTTPUnauthorized
+from pyramid.httpexceptions import HTTPUnauthorized, HTTPFound
 from ..models import Association, Account
 from bokeh.models import ColumnDataSource
 from bokeh.plotting import figure
@@ -13,8 +13,12 @@ from . import DB_ERR_MSG
 def stat_view(request):
     try:
         query = request.dbsession.query(Account)
+<<<<<<< HEAD
         admin = query.filter(Account.username == request.authenticated_userid).one()
 
+=======
+        admin = query.filter(Account.username == request.authenticated_userid).one_or_none()
+>>>>>>> 3613b24fbfbc87e9fd19b8c80f61bf7e1fc70c2c
         if admin.admin is True:
             relationships = request.dbsession.query(Association)
             count = {}
@@ -40,8 +44,6 @@ def stat_view(request):
             p.legend.location = "top_center"
             script, div = components(p)
             return {'script': script, 'div': div}
-        else:
-            return HTTPUnauthorized()
 
-    except DBAPIError:
-        return DBAPIError(DB_ERR_MSG, content_type='text/plain', status=500)
+    except AttributeError:
+        return HTTPUnauthorized()
