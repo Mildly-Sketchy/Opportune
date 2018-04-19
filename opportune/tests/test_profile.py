@@ -17,6 +17,24 @@ def test_profile_view_with_no_keywords(dummy_request):
     assert response == {'message': 'You do not have any keywords saved. Add one!'}
 
 
+# 
+# def test_profile_view_keyerror(dummy_request, db_session, test_user):
+#     '''Test hits keyerror'''
+#     from ..views.profile import profile_view
+#     from pyramid.httpexceptions import HTTPBadRequest
+
+#     dummy_request.method = 'GET'
+#     response = profile_view(dummy_request)
+#     # assert response.status_code == 400
+#     assert isinstance(response, HTTPBadRequest)
+
+    # dummy_request.POST = {'username': 'testtest', 'password': 'wrongpass', 'email': 'test@testthis.com'}
+    # import pdb; pdb.set_trace()
+    # dummy_request.method = 'POST'
+    # response = profile_view(dummy_request)
+    # assert isinstance(response, DBAPIError)
+
+
 def test_profile_view_gets_keywords(dummy_request):
     '''Test profile view returns keywords with fake authenticated user'''
     from ..views.profile import profile_view
@@ -29,7 +47,6 @@ def test_profile_view_gets_keywords(dummy_request):
     config.testing_securitypolicy(
         userid='codefellows', permissive=True
     )
-    # import pdb; pdb.set_trace()
     new_account = Account(
         username='codefellows',
         password='password',
@@ -50,13 +67,23 @@ def test_profile_view_gets_keywords(dummy_request):
 
     dummy_request.dbsession.commit()
 
-    # dummy_request.authenticated_userid = 'codefellows'
     response = profile_view(dummy_request)
 
     assert response['keywords'][0].keyword == 'developer'
 
 
-# def test_profile_delete_keyword_works(dummy_request):
+def test_profile_update_email(dummy_request):
+    '''Test bad attempt update email'''
+    from ..views.profile import update_email
+    from pyramid.httpexceptions import HTTPBadRequest
+
+    dummy_request.method = 'POST'
+    response = update_email(dummy_request)
+    assert response.status_code == 400
+    assert isinstance(response, HTTPBadRequest)
+
+
+# def test_profile_delete_keyword_profile_works(dummy_request):
 #     '''Test delete keyword behaviour'''
 #     from ..views.profile import delete_keyword_profile
 #     from pyramid.httpexceptions import HTTPFound

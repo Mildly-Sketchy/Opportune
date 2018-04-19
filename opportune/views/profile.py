@@ -16,8 +16,10 @@ def profile_view(request):
             try:
                 query = request.dbsession.query(Keyword)
                 user_keywords = query.filter(Association.user_id == request.authenticated_userid, Association.keyword_id == Keyword.keyword)
-            except DBAPIError:
-                raise DBAPIError(DB_ERR_MSG, content_type='text/plain', status=500)
+            except KeyError:
+                return HTTPBadRequest()
+            # except DBAPIError:
+            #     raise DBAPIError(DB_ERR_MSG, content_type='text/plain', status=500)
 
             keywords = [keyword.keyword for keyword in user_keywords]
             if len(keywords) < 1:
