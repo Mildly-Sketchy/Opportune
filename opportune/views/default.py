@@ -8,7 +8,7 @@ def home_view(request):
     """Return homepage."""
     return {}
 
- 
+
 @view_config(route_name='about', renderer='../templates/about.jinja2',
              permission=NO_PERMISSION_REQUIRED)
 def about_view(request):

@@ -56,7 +56,14 @@ def get_jobs(request):
                         salary = b.find('span', attrs={'class': 'no-wrap'}).text
                     except AttributeError:
                         salary = 'Not Listed'
-                    df = df.append({'location': location, 'company': company, 'job_title': job_title, 'salary': salary, 'job_link': job_link}, ignore_index=True)
+                    try:
+                        summary = b.find('span', {'class':'summary'}).text
+                    except AttributeError:
+                        summary = 'Not Listed'
+                    df = df.append({'location': location, 'company': company,
+                                    'job_title': job_title,
+                                    'salary': salary, 'summary': summary,
+                                    'job_link': job_link}, ignore_index=True)
 
         df.company.replace(regex=True,inplace=True,to_replace='\n',value='')
         df.salary.replace(regex=True,inplace=True,to_replace='\n',value='')
