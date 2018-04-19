@@ -64,3 +64,14 @@ def test_bad_request_method_auth_signup_view(dummy_request):
     response = auth_view(dummy_request)
     assert response.status_code == 302
     assert isinstance(response, HTTPFound)
+
+
+def test_username_already_in_use(dummy_request, db_session, test_user):
+    """test username already in use"""
+    from ..views.auth import auth_view
+    db_session.add(test_user)
+
+    dummy_request.POST = {'username': 'testtest', 'password': 'testpass', 'email': 'test@testthis.com'}
+    dummy_request.method = 'POST'
+    response = auth_view(dummy_request)
+    assert response == {'message': 'That username is already in use.'}
