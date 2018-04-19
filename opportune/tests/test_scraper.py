@@ -44,6 +44,18 @@ def test_default_behavior_of_scraper(dummy_request, monkeypatch):
     assert type(response) == dict
 
 
+# def test_scraper(dummy_request, monkeypatch):
+#     ''''''
+#     from ..views.scraper import get_jobs
+#     from urllib3 import PoolManager
+
+#     monkeypatch.setattr(PoolManager, 'request', substitute_urllib_get_request)
+#     dummy_request.method = 'POST'
+#     dummy_request.POST = {'city': 'seattle', 'keyword': 'python'}
+#     # response = get_jobs(dummy_request)
+    
+
+
 def test_scraper_bad_request(dummy_request):
     from ..views.scraper import get_jobs
     from pyramid.httpexceptions import HTTPBadRequest
@@ -60,3 +72,4 @@ def test_default_behavior_of_email_view(dummy_request):
     response = email_view(dummy_request)
     assert len(response) == 0
     assert type(response) == dict
+

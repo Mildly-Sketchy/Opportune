@@ -83,6 +83,19 @@ def test_profile_update_email(dummy_request):
     assert isinstance(response, HTTPBadRequest)
 
 
+# 
+# def test_profile_update_email_found(dummy_request, db_session, test_user):
+#     '''Test email updated'''
+#     from ..views.profile import update_email
+#     from pyramid.httpexceptions import HTTPFound
+#     db_session.add(test_user)
+
+#     dummy_request.POST = {'email': 'change@this.com'}
+#     dummy_request.method = 'POST'
+#     response = update_email(dummy_request)
+#     assert isinstance(response, HTTPFound)
+
+
 # def test_profile_delete_keyword_profile_works(dummy_request):
 #     '''Test delete keyword behaviour'''
 #     from ..views.profile import delete_keyword_profile

@@ -1,3 +1,5 @@
+from pyramid import testing
+
 def test_render_search_view(dummy_request):
     """Test search view"""
     from ..views.search import search_view
@@ -20,6 +22,43 @@ def test_search_view_with_no_keywords(dummy_request):
     dummy_request.method = 'GET'
     response = search_view(dummy_request)
     assert response == {'message': 'You do not have any keywords saved. Add one!'}
+
+
+def test_search_view_gets_keywords(dummy_request):
+    '''Test search view returns keywords with fake authenticated user'''
+    from ..views.search import search_view
+    from ..models.accounts import Account
+    from ..models.keywords import Keyword
+    from ..models.association import Association
+
+    config = testing.setUp()
+
+    config.testing_securitypolicy(
+        userid='codefellows', permissive=True
+    )
+    new_account = Account(
+        username='codefellows',
+        password='password',
+        email='myemail@gmail.com'
+    )
+    dummy_request.dbsession.add(new_account)
+
+    new_keyword = Keyword()
+    new_keyword.keyword = 'developer'
+    dummy_request.dbsession.add(new_keyword)
+
+    dummy_request.dbsession.commit()
+
+    new_association = Association()
+    new_association.user_id = 'codefellows'
+    new_association.keyword_id = 'developer'
+    dummy_request.dbsession.add(new_association)
+
+    dummy_request.dbsession.commit()
+
+    response = search_view(dummy_request)
+
+    assert response['keywords'][0].keyword == 'developer'
 
 
 def test_handle_keywords_view_bad_request(dummy_request):
