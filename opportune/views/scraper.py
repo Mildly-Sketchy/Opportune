@@ -20,12 +20,9 @@ import csv
 def get_jobs(request):
     if request.method == 'POST':
 
-        try:
-            query = request.dbsession.query(Keyword)
-            keyword_query = query.filter(Association.user_id == request.authenticated_userid, Association.keyword_id == Keyword.keyword).all()
-            keywords = [keyword.keyword for keyword in keyword_query]
-        except DBAPIError:
-            raise DBAPIError(DB_ERR_MSG, content_type='text/plain', status=500)
+        query = request.dbsession.query(Keyword)
+        keyword_query = query.filter(Association.user_id == request.authenticated_userid, Association.keyword_id == Keyword.keyword).all()
+        keywords = [keyword.keyword for keyword in keyword_query]
 
         try:
             city = request.POST['city']

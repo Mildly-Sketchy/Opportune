@@ -13,19 +13,14 @@ from . import DB_ERR_MSG
 def profile_view(request):
     """Return profile settings page."""
     if request.method == 'GET':
-            try:
-                query = request.dbsession.query(Keyword)
-                user_keywords = query.filter(Association.user_id == request.authenticated_userid, Association.keyword_id == Keyword.keyword)
-            except KeyError:
-                return HTTPBadRequest()
-            # except DBAPIError:
-            #     raise DBAPIError(DB_ERR_MSG, content_type='text/plain', status=500)
+        query = request.dbsession.query(Keyword)
+        user_keywords = query.filter(Association.user_id == request.authenticated_userid, Association.keyword_id == Keyword.keyword)
 
-            keywords = [keyword.keyword for keyword in user_keywords]
-            if len(keywords) < 1:
-                return{'message': 'You do not have any keywords saved. Add one!'}
+        keywords = [keyword.keyword for keyword in user_keywords]
+        if len(keywords) < 1:
+            return{'message': 'You do not have any keywords saved. Add one!'}
 
-            return{'keywords': user_keywords}
+        return{'keywords': user_keywords}
 
 
 @view_config(route_name='profile/update', renderer='../templates/profile.jinja2')

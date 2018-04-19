@@ -14,7 +14,6 @@ def stat_view(request):
     try:
         query = request.dbsession.query(Account)
         admin = query.filter(Account.username == request.authenticated_userid).one()
-        print('**************', admin.admin,'*************')
 
         if admin.admin is True:
             relationships = request.dbsession.query(Association)
