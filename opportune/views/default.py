@@ -22,10 +22,12 @@ def home_view(request):
 @view_config(route_name='profile', renderer='../templates/profile.jinja2')
 def profile_view(request):
     """Return profile settings page."""
+    
     if request.method == 'GET':
             try:
                 query = request.dbsession.query(Keyword)
                 user_keywords = query.filter(Association.user_id == request.authenticated_userid, Association.keyword_id == Keyword.keyword)
+                
             except DBAPIError:
                 raise DBAPIError(DB_ERR_MSG, content_type='text/plain', status=500)
 
