@@ -259,17 +259,33 @@ a:hover
   transform: none;
 }
 
-/* #bokeh
-{
-+  margin-left: 30%;
-+} */
-
-
-#patricia, #gene, #kat, #austin, #abouth1 {
+#abouth1 {
     text-align: center;
 }
 
-.paragraph {
-    margin-left: 300px;
-    margin-right: 300px;
+#aboutlist {
+    list-style: none;
+    margin-left: 225px;
+}
+
+#aboutlist li {
+    display: inline-block;
+    padding: 15px;
+}
+
+#aboutlist a {
+    padding-left: 100px;
+}
+
+#gene img {
+    height: 420px;
+}
+
+#aboutlist p {
+    width: 450px;
+}
+
+#bokeh
+{
+  margin-left: 30%; 
 }
