@@ -261,5 +261,22 @@ a:hover
 
 #bokeh
 {
-  margin-left: 10%;
+
++  margin-left: 30%;
++}
+
+#kat{
+    height: 100 px;
+}
+
+#patricia{
+    height: 100 px;
+}
+
+#gene{
+    height: 100 px;
+}
+
+#austin{
+    height: 100 px;
 }
