@@ -54,9 +54,9 @@ def test_scraper_bad_request(dummy_request):
 def test_default_behavior_of_email_view(dummy_request):
     """Test default email view behavior."""
     from ..views.scraper import email_view
+    from pyramid.httpexceptions import HTTPFound
     response = email_view(dummy_request)
-    assert len(response) == 0
-    assert type(response) == dict
+    assert isinstance(response, HTTPFound)
 
 
 def test_file_download_status_code(dummy_request):

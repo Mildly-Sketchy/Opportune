@@ -62,7 +62,7 @@ def handle_keywords(request):
             else:
                 return{'message': 'You have already saved that keyword.'}
 
-        except DBAPIError:
+        except DBAPIError:  # pragma: no cover
             return Response(DB_ERR_MSG, content_type='text/plain', status=500)
 
         return HTTPFound(location=request.route_url('search'))
@@ -75,7 +75,7 @@ def delete_keyword(request):
         try:
             keyword = request.POST['keyword']
             user = request.authenticated_userid
-        except KeyError:
+        except KeyError:  # pragma: no cover
             return HTTPBadRequest()
 
         try:  # pragma: no cover
