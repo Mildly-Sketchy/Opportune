@@ -2,28 +2,39 @@
 {% block content %}
 <h1 id="abouth1">About the Team</h1>
 
-<div id="kat">
-    <h2>Kat</h2>
-    <img src="{{request.static_url('opportune:static/kat-450x400.jpg')}}">
-    <p class="paragraph">In a previous life, Kat worked as a helpdesk engineer for an offsite data backup software company and a human film encyclopedia at an independent video store (ask her about foreign or arthouse horror). Her hobbies include rock climbing, cosplay, building computers, and video games.</p>
-</div>
 
-<div id="patricia">
-    <h2>Patricia</h2>
-    <img src="{{request.static_url('opportune:static/patricia-400x400.jpg')}}">
-    <p class="paragraph">Patricia likes snacking and coding and weird Canadian snack foods that her sister brings back from Vancouver. She lives in Issaquah, and has really been enjoying software development because it lets her snack and code at the same time.</p>
-</div>
+<ul id="aboutlist">
+    <li id="kat">
+        <h2>Kat</h2>
+        <img src="{{request.static_url('opportune:static/kat-450x400.jpg')}}">
+        <p class="paragraph">In a previous life, Kat worked as a helpdesk engineer for an offsite data backup software company and a human film encyclopedia at an independent video store (ask her about foreign or arthouse horror). Her hobbies include rock climbing, cosplay, building computers, and video games.</p>
+        <a href="https://github.com/katcosgrove">GitHub</a>
+        <a href="https://www.linkedin.com/in/katcosgrove/">LinkedIn</a>
+    </li>
 
-<div id="gene">
-    <h2>Gene</h2>
-    <img src="{{request.static_url('opportune:static/gene-400x450.png')}}">
-    <p class="paragraph">After spending 6 beautiful years in San Diego working as a contractor for the Navy, Gene decided to set sail for yet another adventure. This time to learn computer programming. The plan is to become a python software developer, but setting his sights high for bigger roles.</p>
-</div>
+    <li>
+        <h2>Patricia</h2>
+        <img src="{{request.static_url('opportune:static/patricia-400x400.jpg')}}">
+        <p class="paragraph">Patricia likes snacking and coding and weird Canadian snack foods that her sister brings back from Vancouver. She lives in Issaquah and loves hiking with her black lab. She has really been enjoying software development because it lets her snack and code at the same time.</p>
+        <a href="https://github.com/Patricia888">GitHub</a>
+        <a href="https://www.linkedin.com/in/patricia-raftery/">LinkedIn</a>
+    </li><br>
 
-<div id="austin">
-    <h2>Austin</h2>
-    <img src="{{request.static_url('opportune:static/austin-400x400.png')}}">
-    <p class="paragraph">Hailing from the Emerald City of Angels that Never Sleeps, Austin is excited to bring the perspectives of three corners of the US of A together in the software development space. He brings an eclectic nature, from hipster music tastes, to foreign films, to even tarot cards. Can you tell he has a background in theatre? Hit him up to collaborate!</p>
-</div>
+    <li id="gene">
+        <h2>Gene</h2>
+        <img src="{{request.static_url('opportune:static/gene-400x450.png')}}">
+        <p class="paragraph">After spending 6 beautiful years in San Diego working as a contractor for the Navy, Gene decided to set sail for yet another adventure. This time to learn computer programming. The plan is to become a python software developer, but setting his sights high for bigger roles.</p>
+        <a href="https://github.com/captain-c00keys">GitHub</a>
+        <a href="https://www.linkedin.com/in/gene-pieterson/">LinkedIn</a>
+    </li>
+
+    <li>
+        <h2>Austin</h2>
+        <img src="{{request.static_url('opportune:static/austin-400x400.png')}}">
+        <p class="paragraph">Hailing from the Emerald City of Angels that Never Sleeps, Austin is excited to bring the perspectives of three corners of the US of A together in the software development space. He brings an eclectic nature, from hipster music tastes, to foreign films, to even tarot cards. Can you tell he has a background in theatre? Hit him up to collaborate!</p>
+        <a href="https://github.com/austincmatteson">GitHub</a>
+        <a href="https://www.linkedin.com/in/austin-matteson">LinkedIn</a>
+    </li>
+</ul>
 
 {% endblock content %}
