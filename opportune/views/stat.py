@@ -62,8 +62,6 @@ def stat_view(request):
             p1 = figure(
                 title="Salaries by Language", background_fill_color="#E8DDCB")
             p1.xaxis[0].formatter.use_scientific = False
-            p1.legend.location = "top_center"
-            p1.legend.click_policy = "hide"
             for lng in lang:
                 df = pd.read_csv(lng)
                 y = list(df[lang_legend[place_count]])
@@ -79,6 +77,8 @@ def stat_view(request):
                     line_color=Spectral6[place_count],
                     legend=lang_legend[place_count])
                 place_count += 1
+            p1.legend.location = "top_center"
+            p1.legend.click_policy = "hide"
             p2 = figure(
                 x_range=lang_legend, y_range=(0, max(avg)), plot_height=500,
                 title="Average Salaries by Language")
@@ -107,8 +107,6 @@ def stat_view(request):
             p3 = figure(
                 title="Salaries by Job", background_fill_color="#E8DDCB")
             p3.xaxis[0].formatter.use_scientific = False
-            p3.legend.location = "top_center"
-            p3.legend.click_policy = "hide"
             for jab in job:
                 df = pd.read_csv(jab)
                 y = list(df[job_legend[place_count]])
@@ -124,6 +122,8 @@ def stat_view(request):
                     line_color=Spectral5[place_count],
                     legend=job_legend[place_count])
                 place_count += 1
+            p3.legend.location = "top_center"
+            p3.legend.click_policy = "hide"
             p4 = figure(x_range=job_legend, y_range=(0, max(avg1)),
                         plot_height=500, title="Average Salaries by Job")
             source = ColumnDataSource(
