@@ -101,8 +101,14 @@ Three SQL databases are used for persistence to store job postings and user data
 
 04/19/2018 1400 - Test coverage is 85%
 
+04/19/2018 1600 - Test coverage is 95%
+
+04/19/2018 1800 - About Us page, pictures and descriptions added, styling done
+
 #### Day 5
 
 04/20/2018 0900 - Bug fixes with scraper and email
+
+04/20/2018 1000 - LinkedIn and GitHub links added to About Us page, better styling done
 
 04/20/2018 1400 - Presentation
