@@ -97,8 +97,12 @@ Three SQL databases are used for persistence to store job postings and user data
 
 04/19/2018 1200 - Mass scraper notebook with CSV files added
 
+04/19/2018 1300 - Data analysis done on the user's keyword searches and is displayed to the user's profile
+
 04/19/2018 1400 - Test coverage is 85%
 
 #### Day 5
+
+04/20/2018 0900 - Bug fixes with scraper and email
 
 04/20/2018 1400 - Presentation
