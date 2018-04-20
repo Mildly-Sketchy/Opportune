@@ -18,6 +18,7 @@ def stat_view(request):
         query = request.dbsession.query(Account)
         admin = query.filter(Account.username == request.authenticated_userid).one_or_none()
         if admin.admin is True:
+            # From here, down to next comment, is data we've tracked but decided not to render.
             relationships = request.dbsession.query(Association)
             count = {}
             for each in relationships:
@@ -40,7 +41,7 @@ def stat_view(request):
             p.xgrid.grid_line_color = None
             p.legend.orientation = "horizontal"
             p.legend.location = "top_center"
-
+            # End of unrendered tracking.
             lang = ['./mass_scraper/pythonresults.csv', './mass_scraper/javascriptresults.csv','./mass_scraper/csharpresults.csv', './mass_scraper/javaresults.csv', './mass_scraper/phpresults.csv', './mass_scraper/cplusresults.csv']
             lang_legend = ['python', 'javascript', 'csharp', 'java', 'php', 'Cplus']
             avg = []
