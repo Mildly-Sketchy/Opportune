@@ -1,0 +1,7 @@
+[run]
+omit = 
+    opportune/test*
+    opportune/__init__.py
+    opportune/models/__init__.py
+    opportune/models/meta.py
+    opportune/scripts/*

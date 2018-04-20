@@ -1,0 +1,29 @@
+{% extends "base.jinja2" %}
+{% block content %}
+    <div class="banner">
+    </div>
+    <h1>Results</h1>
+        {% for row in data %}
+    <ul id="new-results">
+        <li ><pre>{{ row.job_title }}</pre></li>
+        <li>Company: {{ row.company }}</li>
+        <li>Location: {{ row.location }}</li>
+        <li>Salary: {{ row.salary }}</li>
+        <li>Summary: {{ row.summary }}</li>
+        <li><a href="{{row.job_link}}">Link to Posting</a></li>
+    </ul>
+        <br>
+        {% endfor %}
+<div class="resultsButtons">
+<ul>
+<li><form class="download" action="{{request.route_url('search/results/download')}}">
+  <input type="hidden" name="csrf_token" value="{{request.session.get_csrf_token()}}">
+  <button>Download Results</button>
+</form> </li>
+<li><form class="sendEmail" action="{{request.route_url('search/results/email')}}" method="POST">
+  <input type="hidden" name="csrf_token" value="{{request.session.get_csrf_token()}}">
+  <button>Email Results</button>
+</form> </li>
+</div>
+{% endblock content %}
+ 
