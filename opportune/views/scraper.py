@@ -6,7 +6,7 @@ from ..models import Keyword
 from ..models import Association
 from sqlalchemy.exc import DBAPIError
 from pyramid.response import FileResponse
-from pyramid.httpexceptions import HTTPBadRequest
+from pyramid.httpexceptions import HTTPBadRequest, HTTPFound
 from . import DB_ERR_MSG
 import urllib3
 import pandas as pd
@@ -102,7 +102,7 @@ def email_view(request):
         smtpObj.login(mail_from, log)
         smtpObj.sendmail(mail_from, query.email, msg)
         smtpObj.quit()
-    return {}
+    return HTTPFound(location=request.route_url('profile'))
 
 
 @view_config(route_name='search/results/download')
