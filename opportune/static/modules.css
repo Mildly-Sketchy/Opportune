@@ -264,18 +264,34 @@ a:hover
 +  margin-left: 30%;
 +}
 
-#kat{
-    height: 100 px;
+#kat img{
+    width: 100 px;
 }
 
-#patricia{
-    height: 100 px;
+#kat p{
+    width: 100 px;
 }
 
-#gene{
-    height: 100 px;
+#patricia img{
+    width: 100 px;
 }
 
-#austin{
-    height: 100 px;
+#patricia p{
+    width: 100 px;
+}
+
+#gene img{
+    width: 100 px;
+}
+
+#gene p{
+    width: 100 px;
+}
+
+#austin img{
+    width: 100 px;
+}
+
+#austin p{
+    width: 100 px;
 }
