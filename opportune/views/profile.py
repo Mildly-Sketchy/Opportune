@@ -14,7 +14,9 @@ def profile_view(request):
     """Return profile settings page."""
     if request.method == 'GET':
         query = request.dbsession.query(Keyword)
-        user_keywords = query.filter(Association.user_id == request.authenticated_userid, Association.keyword_id == Keyword.keyword)
+        user_keywords = query.filter(
+            Association.user_id == request.authenticated_userid,
+            Association.keyword_id == Keyword.keyword)
 
         keywords = [keyword.keyword for keyword in user_keywords]
         if len(keywords) < 1:
@@ -23,7 +25,8 @@ def profile_view(request):
         return{'keywords': user_keywords}
 
 
-@view_config(route_name='profile/update', renderer='../templates/profile.jinja2')
+@view_config(
+    route_name='profile/update', renderer='../templates/profile.jinja2')
 def update_email(request):
     """Allow user to update email address."""
     try:
@@ -32,7 +35,8 @@ def update_email(request):
         return HTTPBadRequest()
     try:  # pragma: no cover
         query = request.dbsession.query(Account)
-        user = query.filter(Account.username == request.authenticated_userid).one()
+        user = query.filter(
+            Account.username == request.authenticated_userid).one()
         user.email = updated_email
     except DBAPIError:  # pragma: no cover
         return Response(DB_ERR_MSG, content_type='text/plain', status=500)
@@ -40,12 +44,14 @@ def update_email(request):
     return HTTPFound(location=request.route_url('profile'))
 
 
-@view_config(route_name='profile/delete', renderer='../templates/profile.jinja2')
+@view_config(
+    route_name='profile/delete', renderer='../templates/profile.jinja2')
 def delete_account(request):
     """Allow user to update email address."""
     try:  # pragma: no cover
         query = request.dbsession.query(Account)
-        removed = query.filter(Account.username == request.authenticated_userid).one()
+        removed = query.filter(
+            Account.username == request.authenticated_userid).one()
         request.dbsession.delete(removed)
 
         return HTTPFound(location=request.route_url('logout'))
@@ -55,9 +61,13 @@ def delete_account(request):
     return HTTPFound(location=request.route_url('home'))
 
 
-@view_config(route_name='profile/keywords/delete', renderer='../templates/profile.jinja2')
+@view_config(
+    route_name='profile/keywords/delete',
+    renderer='../templates/profile.jinja2'
+    )
 def delete_keyword_profile(request):
-    """Delete a requested keyword from association table for that particular user."""
+    """Delete a requested keyword from association table
+    for that particular user."""
     if request.method == 'POST':
         try:
             keyword = request.POST['keyword']
@@ -68,11 +78,15 @@ def delete_keyword_profile(request):
         try:
 
             query = request.dbsession.query(Association)
-            removed = query.filter(Association.keyword_id == keyword, Association.user_id == user).one()
+            removed = query.filter(
+                Association.keyword_id == keyword,
+                Association.user_id == user).one()
 
             request.dbsession.delete(removed)
 
             return HTTPFound(location=request.route_url('profile'))
 
         except DBAPIError:  # pragma: no cover
-            return Response(DB_ERR_MSG, content_type='text/plain', status=500)  # pragma: no cover
+            return Response(
+                DB_ERR_MSG,
+                content_type='text/plain', status=500)  # pragma: no cover

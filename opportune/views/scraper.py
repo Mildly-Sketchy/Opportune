@@ -6,7 +6,7 @@ from ..models import Keyword
 from ..models import Association
 from sqlalchemy.exc import DBAPIError
 from pyramid.response import FileResponse
-from pyramid.httpexceptions import HTTPBadRequest
+from pyramid.httpexceptions import HTTPBadRequest, HTTPFound
 from . import DB_ERR_MSG
 import urllib3
 import pandas as pd
@@ -32,7 +32,7 @@ def get_jobs(request):  # pragma: no cover
         url_template = 'https://www.indeed.com/jobs?q={}&l={}'
         max_results = 30
 
-        df = pd.DataFrame(columns=['location', 'company', 'job_title', 'salary', 'job_link'])
+        df = pd.DataFrame(columns=['location', 'company', 'job_title', 'salary', 'job_link', 'summary'])
         requests.packages.urllib3.disable_warnings()
         for keyword in keywords:
             for start in range(0, max_results):
@@ -65,6 +65,9 @@ def get_jobs(request):  # pragma: no cover
 
         df.company.replace(regex=True,inplace=True,to_replace='\n',value='')
         df.salary.replace(regex=True,inplace=True,to_replace='\n',value='')
+        df.summary.replace(regex=True, inplace=True, to_replace=u"\u2018", value="'")
+        df.summary.replace(regex=True, inplace=True, to_replace=u"\u2019", value="'")
+        df.summary.replace(regex=True, inplace=True, to_replace=u"\u2013", value="'")
         cleaned = df.drop_duplicates(['job_link'])
         output = cleaned.head(30)
         output.to_csv('results.csv', index=False)
@@ -99,7 +102,7 @@ def email_view(request):
         smtpObj.login(mail_from, log)
         smtpObj.sendmail(mail_from, query.email, msg)
         smtpObj.quit()
-    return {}
+    return HTTPFound(location=request.route_url('profile'))
 
 
 @view_config(route_name='search/results/download')
