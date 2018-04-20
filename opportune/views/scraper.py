@@ -65,6 +65,9 @@ def get_jobs(request):  # pragma: no cover
 
         df.company.replace(regex=True,inplace=True,to_replace='\n',value='')
         df.salary.replace(regex=True,inplace=True,to_replace='\n',value='')
+        df.summary.replace(regex=True, inplace=True, to_replace=u"\u2018", value="'")
+        df.summary.replace(regex=True, inplace=True, to_replace=u"\u2019", value="'")
+        df.summary.replace(regex=True, inplace=True, to_replace=u"\u2013", value="'")
         cleaned = df.drop_duplicates(['job_link'])
         output = cleaned.head(30)
         output.to_csv('results.csv', index=False)
