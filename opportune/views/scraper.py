@@ -32,7 +32,7 @@ def get_jobs(request):  # pragma: no cover
         url_template = 'https://www.indeed.com/jobs?q={}&l={}'
         max_results = 30
 
-        df = pd.DataFrame(columns=['location', 'company', 'job_title', 'salary', 'job_link'])
+        df = pd.DataFrame(columns=['location', 'company', 'job_title', 'salary', 'job_link', 'summary'])
         requests.packages.urllib3.disable_warnings()
         for keyword in keywords:
             for start in range(0, max_results):
