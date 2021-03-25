@@ -43,7 +43,7 @@ pytest==3.5.0
 pytest-cov==2.5.1
 python-dateutil==2.7.2
 pytz==2018.4
-PyYAML==3.12
+PyYAML==5.4
 repoze.lru==0.7
 requests==2.18.4
 scipy==1.0.1
