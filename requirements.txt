@@ -18,7 +18,7 @@ Mako==1.0.7
 MarkupSafe==1.0
 mccabe==0.6.1
 more-itertools==4.1.0
-numpy==1.14.2
+numpy==1.22.0
 packaging==17.1
 pandas==0.22.0
 PasteDeploy==1.5.2
